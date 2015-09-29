@@ -59,8 +59,14 @@
     <Reference Include="Nancy.Hosting.Aspnet">
       <HintPath>..\..\packages\Nancy.Hosting.Aspnet.1.3.0\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
     </Reference>
+    <Reference Include="Nancy.Metadata.Modules">
+      <HintPath>..\..\packages\Nancy.Metadata.Modules.1.3.0\lib\net40\Nancy.Metadata.Modules.dll</HintPath>
+    </Reference>
     <Reference Include="Nancy.Serialization.JsonNet">
       <HintPath>..\..\packages\Nancy.Serialization.JsonNet.1.3.0\lib\net40\Nancy.Serialization.JsonNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Swagger">
+      <HintPath>..\..\packages\Nancy.Swagger.0.1.0-alpha3\lib\net40\Nancy.Swagger.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -73,6 +79,9 @@
     </Reference>
     <Reference Include="Simple.Data.SqlServer">
       <HintPath>..\..\packages\Simple.Data.SqlServer.0.19.0.0\lib\net40\Simple.Data.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Swagger.ObjectModel">
+      <HintPath>..\..\packages\Swagger.ObjectModel.0.1.0-alpha3\lib\net40\Swagger.ObjectModel.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -92,13 +101,49 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="swagger-ui\css\print.css" />
+    <Content Include="swagger-ui\css\reset.css" />
+    <Content Include="swagger-ui\css\screen.css" />
+    <Content Include="swagger-ui\css\style.css" />
+    <Content Include="swagger-ui\css\typography.css" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.svg" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.svg" />
+    <Content Include="swagger-ui\images\explorer_icons.png" />
+    <Content Include="swagger-ui\images\favicon-16x16.png" />
+    <Content Include="swagger-ui\images\favicon-32x32.png" />
+    <Content Include="swagger-ui\images\favicon.ico" />
+    <Content Include="swagger-ui\images\logo_small.png" />
+    <Content Include="swagger-ui\images\pet_store_api.png" />
+    <Content Include="swagger-ui\images\throbber.gif" />
+    <Content Include="swagger-ui\images\wordnik_api.png" />
+    <Content Include="swagger-ui\index.html" />
+    <Content Include="swagger-ui\lang\en.js" />
+    <Content Include="swagger-ui\lang\es.js" />
+    <Content Include="swagger-ui\lang\pt.js" />
+    <Content Include="swagger-ui\lang\ru.js" />
+    <Content Include="swagger-ui\lang\tr.js" />
+    <Content Include="swagger-ui\lang\translator.js" />
+    <Content Include="swagger-ui\lang\zh-cn.js" />
+    <Content Include="swagger-ui\lib\backbone-min.js" />
+    <Content Include="swagger-ui\lib\handlebars-2.0.0.js" />
+    <Content Include="swagger-ui\lib\highlight.7.3.pack.js" />
+    <Content Include="swagger-ui\lib\jquery-1.8.0.min.js" />
+    <Content Include="swagger-ui\lib\jquery.ba-bbq.min.js" />
+    <Content Include="swagger-ui\lib\jquery.slideto.min.js" />
+    <Content Include="swagger-ui\lib\jquery.wiggle.min.js" />
+    <Content Include="swagger-ui\lib\marked.js" />
+    <Content Include="swagger-ui\lib\swagger-oauth.js" />
+    <Content Include="swagger-ui\lib\underscore-min.js" />
+    <Content Include="swagger-ui\o2c.html" />
+    <Content Include="swagger-ui\swagger-ui.js" />
+    <Content Include="swagger-ui\swagger-ui.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfig.cs" />
-    <Compile Include="Domain\Entities\Account.cs" />
-    <Compile Include="Domain\Entities\Entity.cs" />
-    <Compile Include="Domain\Entities\Url.cs" />
+    <Compile Include="Entities\Account.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Url.cs" />
     <Compile Include="Infrastructure\Clock.cs" />
     <Compile Include="Infrastructure\Data\Commands\Account\CreateCommand.cs" />
     <Compile Include="Infrastructure\Data\Commands\Account\ExcludeCommand.cs" />
@@ -129,17 +174,32 @@
     <Compile Include="Lib\Mappings\AccountProfile.cs" />
     <Compile Include="Lib\Mappings\UrlProfile.cs" />
     <Compile Include="Lib\PartialUpdater.cs" />
-    <Compile Include="Lib\Validators\AccountValidator.cs" />
-    <Compile Include="Lib\Validators\UrlValidator.cs" />
-    <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\Url.cs" />
-    <Compile Include="Modules\Accounts.cs" />
-    <Compile Include="Modules\Base.cs" />
-    <Compile Include="Modules\Urls.cs" />
+    <Compile Include="Lib\Validators\Account\Post\AccountValidator.cs" />
+    <Compile Include="Lib\Validators\Account\Put\AccountValidator.cs" />
+    <Compile Include="Lib\Validators\Url\UrlValidator.cs" />
+    <Compile Include="Models\Account\Get\Account.cs" />
+    <Compile Include="Models\Account\Post\Account.cs" />
+    <Compile Include="Models\Account\Put\Account.cs" />
+    <Compile Include="Models\Url\Account.cs" />
+    <Compile Include="Models\Url\Get\Url.cs" />
+    <Compile Include="Models\Url\Post\Url.cs" />
+    <Compile Include="Modules\AccountsModule.cs" />
+    <Compile Include="Modules\BaseModule.cs" />
+    <Compile Include="Modules\AccountsMetadataModule.cs" />
+    <Compile Include="Modules\UrlsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.eot" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.ttf" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.woff" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.woff2" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.eot" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.ttf" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.woff" />
+    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.woff2" />
+    <Content Include="swagger-ui\lib\underscore-min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -147,6 +207,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

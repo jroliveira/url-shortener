@@ -9,7 +9,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Account
         {
             var db = Database.OpenNamedConnection("db");
 
-            Domain.Entities.Account entity = db.Accounts.Get(id);
+            Entities.Account entity = db.Accounts.Get(id);
 
             if (entity == null)
             {

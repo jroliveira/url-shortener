@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
+using Model = UrlShortener.WebApi.Models.Url.Post;
 
-namespace UrlShortener.WebApi.Lib.Validators
+namespace UrlShortener.WebApi.Lib.Validators.Url
 {
-    public class UrlValidator : AbstractValidator<Models.Url>
+    public class UrlValidator : AbstractValidator<Model.Url>
     {
         public UrlValidator()
         {

@@ -3,6 +3,7 @@ using System.Linq;
 using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
 using UrlShortener.WebApi.Infrastructure.Filter.Data;
+using Model = UrlShortener.WebApi.Models.Url;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
 {
@@ -17,7 +18,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
             _limit = limit;
         }
 
-        public virtual IEnumerable<Models.Url> GetResult(Filter.Filter filter)
+        public virtual IEnumerable<Model.Get.Url> GetResult(Filter.Filter filter)
         {
             var db = Database.OpenNamedConnection("db");
 
@@ -33,15 +34,15 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
                               .Skip(_skip.Apply(filter))
                               .Take(_limit.Apply(filter));
 
-            var model = new List<Models.Url>();
+            var model = new List<Model.Get.Url>();
 
             foreach (var item in data)
             {
-                model.Add(new Models.Url
+                model.Add(new Model.Get.Url
                 {
                     Id = item.Id,
                     Address = item.Address,
-                    Account = new Models.Account
+                    Account = new Model.Account
                     {
                         Id = item.AccountId
                     }

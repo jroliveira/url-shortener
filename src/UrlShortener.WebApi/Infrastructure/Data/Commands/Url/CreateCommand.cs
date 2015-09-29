@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
-using UrlShortener.WebApi.Lib.Validators;
+using UrlShortener.WebApi.Lib.Validators.Url;
+using Model = UrlShortener.WebApi.Models.Url.Post;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Url
 {
@@ -17,7 +18,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Url
             _mappingEngine = mappingEngine;
         }
 
-        public virtual Domain.Entities.Url Execute(Models.Url model)
+        public virtual Entities.Url Execute(Model.Url model)
         {
             var validateResult = _validator.Validate(model);
 
@@ -26,7 +27,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Url
                 throw new UrlShortenerException(validateResult.Errors);
             }
 
-            var entity = _mappingEngine.Map<Domain.Entities.Url>(model);
+            var entity = _mappingEngine.Map<Entities.Url>(model);
 
             entity.Shorten();
 

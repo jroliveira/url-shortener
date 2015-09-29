@@ -1,6 +1,6 @@
 ﻿using UrlShortener.WebApi.Infrastructure;
 
-namespace UrlShortener.WebApi.Domain.Entities
+namespace UrlShortener.WebApi.Entities
 {
     public class Url : Entity<int>
     {

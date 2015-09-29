@@ -1,22 +1,24 @@
 ﻿using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
+using Model = UrlShortener.WebApi.Models.Account.Get;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
 {
     public class GetById
     {
-        public virtual Models.Account GetResult(int id)
+        public virtual Model.Account GetResult(int id)
         {
             var db = Database.OpenNamedConnection("db");
 
-            Models.Account model = db.Accounts.All()
-                                              .Select(
-                                                  db.Accounts.Id,
-                                                  db.Accounts.Name,
-                                                  db.Accounts.Email)
-                                              .Where(
-                                                  db.Accounts.Id == id)
-                                              .FirstOrDefault();
+            Model.Account model = db.Accounts.All()
+                                             .Select(
+                                                 db.Accounts.Id,
+                                                 db.Accounts.Name,
+                                                 db.Accounts.Email)
+                                             .Where(
+                                                 db.Accounts.Id == id
+                                                 && db.Accounts.Deleted == false)
+                                             .FirstOrDefault();
 
             if (model == null)
             {

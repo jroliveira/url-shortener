@@ -1,7 +1,7 @@
 ﻿using System;
 using UrlShortener.WebApi.Infrastructure;
 
-namespace UrlShortener.WebApi.Domain.Entities
+namespace UrlShortener.WebApi.Entities
 {
     public class Entity<TId>
     {

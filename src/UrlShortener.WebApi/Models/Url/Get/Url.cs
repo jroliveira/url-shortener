@@ -1,4 +1,4 @@
-﻿namespace UrlShortener.WebApi.Models
+﻿namespace UrlShortener.WebApi.Models.Url.Get
 {
     public class Url
     {

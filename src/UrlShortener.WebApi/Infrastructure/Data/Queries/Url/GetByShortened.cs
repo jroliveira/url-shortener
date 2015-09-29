@@ -1,11 +1,12 @@
 ﻿using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
+using Model = UrlShortener.WebApi.Models.Url;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
 {
     public class GetByShortened
     {
-        public virtual Models.Url GetResult(string shortened)
+        public virtual Model.Get.Url GetResult(string shortened)
         {
             var db = Database.OpenNamedConnection("db");
 
@@ -27,11 +28,11 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
                 throw new NotFoundException();
             }
 
-            var model = new Models.Url
+            var model = new Model.Get.Url
             {
                 Id = data.Id,
                 Address = data.Address,
-                Account = new Models.Account
+                Account = new Model.Account
                 {
                     Id = data.AccountId
                 }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using UrlShortener.WebApi.Domain.Entities;
 
 namespace UrlShortener.WebApi.Lib.Mappings
 {
@@ -8,12 +7,19 @@ namespace UrlShortener.WebApi.Lib.Mappings
         protected override void Configure()
         {
             Mapper
-                .CreateMap<Models.Account, Account>()
+                .CreateMap<Models.Account.Post.Account, Entities.Account>()
+                .ForMember(d => d.Id, o => o.Ignore())
                 .ForMember(d => d.CreationDate, o => o.Ignore())
                 .ForMember(d => d.Deleted, o => o.Ignore());
 
             Mapper
-                .CreateMap<Account, Models.Account>();
+                .CreateMap<Models.Account.Put.Account, Entities.Account>()
+                .ForMember(d => d.Id, o => o.Ignore())
+                .ForMember(d => d.CreationDate, o => o.Ignore())
+                .ForMember(d => d.Deleted, o => o.Ignore());
+
+            Mapper
+                .CreateMap<Entities.Account, Models.Account.Put.Account>();
         }
     }
 }
