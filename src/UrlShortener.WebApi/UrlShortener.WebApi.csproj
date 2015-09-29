@@ -68,9 +68,6 @@
     <Reference Include="Nancy.Serialization.JsonNet">
       <HintPath>..\..\packages\Nancy.Serialization.JsonNet.1.3.0\lib\net40\Nancy.Serialization.JsonNet.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Swagger">
-      <HintPath>..\..\packages\Nancy.Swagger.0.1.0-alpha3\lib\net40\Nancy.Swagger.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -82,9 +79,6 @@
     </Reference>
     <Reference Include="Simple.Data.SqlServer">
       <HintPath>..\..\packages\Simple.Data.SqlServer.0.19.0.0\lib\net40\Simple.Data.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Swagger.ObjectModel">
-      <HintPath>..\..\packages\Swagger.ObjectModel.0.1.0-alpha3\lib\net40\Swagger.ObjectModel.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -191,7 +185,7 @@
     <Compile Include="Models\Url\Post\Url.cs" />
     <Compile Include="Modules\AccountsModule.cs" />
     <Compile Include="Modules\BaseModule.cs" />
-    <Compile Include="Modules\AccountsMetadataModule.cs" />
+    <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\UrlsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -206,6 +200,7 @@
     <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.woff" />
     <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.woff2" />
     <Content Include="swagger-ui\lib\underscore-min.map" />
+    <Content Include="swagger.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -15,10 +15,10 @@ namespace UrlShortener.WebApi.Modules
         private readonly RecoverCommand _recover;
 
         public UrlsModule(GetAll getAll,
-                    GetByShortened getByShortened,
-                    CreateCommand create,
-                    ExcludeCommand exclude,
-                    RecoverCommand recover)
+                          GetByShortened getByShortened,
+                          CreateCommand create,
+                          ExcludeCommand exclude,
+                          RecoverCommand recover)
             : base("urls")
         {
             _getAll = getAll;

@@ -18,11 +18,11 @@ namespace UrlShortener.WebApi.Modules
         private readonly RecoverCommand _recover;
 
         public AccountsModule(GetAll getAll,
-                        GetById getById,
-                        CreateCommand create,
-                        UpdateCommand update,
-                        ExcludeCommand exclude,
-                        RecoverCommand recover)
+                              GetById getById,
+                              CreateCommand create,
+                              UpdateCommand update,
+                              ExcludeCommand exclude,
+                              RecoverCommand recover)
             : base("accounts")
         {
             _getAll = getAll;
