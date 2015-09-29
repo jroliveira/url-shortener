@@ -7,6 +7,7 @@ Web Api feita em Nancy.
 ### Installing
 
 * `git clone https://github.com/jroliveira/url-shortener.git`
+* `bundler`
 
 ### Contributions 
 

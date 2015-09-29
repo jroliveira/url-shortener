@@ -43,6 +43,9 @@
     <Reference Include="AutoMapper">
       <HintPath>..\..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="FluentMigrator">
+      <HintPath>..\..\packages\FluentMigrator.1.6.0\lib\40\FluentMigrator.dll</HintPath>
+    </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
     </Reference>
@@ -166,6 +169,9 @@
     <Compile Include="Infrastructure\Filter\Filter.cs" />
     <Compile Include="Infrastructure\Filter\Limit.cs" />
     <Compile Include="Infrastructure\Filter\Skip.cs" />
+    <Compile Include="Infrastructure\Data\Migrations\2015\09\29\CreateUrlsTable.cs" />
+    <Compile Include="Infrastructure\Data\Migrations\2015\09\29\Main.cs" />
+    <Compile Include="Infrastructure\Data\Migrations\2015\09\29\CreateAccountsTable.cs" />
     <Compile Include="Infrastructure\Security\IHashAlgorithm.cs" />
     <Compile Include="Infrastructure\Security\Md5HashAlgorithm.cs" />
     <Compile Include="Infrastructure\Shortener.cs" />
