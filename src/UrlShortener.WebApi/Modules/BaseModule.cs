@@ -1,6 +1,7 @@
 ﻿using System;
 using Nancy;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
+using UrlShortener.WebApi.Infrastructure.Extensions;
 using UrlShortener.WebApi.Infrastructure.Filter;
 
 namespace UrlShortener.WebApi.Modules
@@ -19,18 +20,13 @@ namespace UrlShortener.WebApi.Modules
             {
                 return func.Invoke();
             }
-            catch (NotFoundException)
+            catch (NotFoundException exception)
             {
-                return HttpStatusCode.NotFound;
+                return Response.AsException(exception, HttpStatusCode.NotFound);
             }
             catch (Exception exception)
             {
-                var model = new
-                {
-                    erros = new[] { exception.Message }
-                };
-
-                return Response.AsJson(model, HttpStatusCode.InternalServerError);
+                return Response.AsException(exception, HttpStatusCode.InternalServerError);
             }
         }
 

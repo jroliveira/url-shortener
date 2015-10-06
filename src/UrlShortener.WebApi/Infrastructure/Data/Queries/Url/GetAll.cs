@@ -51,7 +51,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
 
             if (model == null || !model.Any())
             {
-                throw new NotFoundException();
+                throw new NotFoundException("Resource 'urls' with filter passed could not be found");
             }
 
             return model;

@@ -30,7 +30,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
 
             if (model == null || !model.Any())
             {
-                throw new NotFoundException();
+                throw new NotFoundException("Resource 'urls' with url shortener {0} could not be found", shortened);
             }
 
             return model.FirstOrDefault();

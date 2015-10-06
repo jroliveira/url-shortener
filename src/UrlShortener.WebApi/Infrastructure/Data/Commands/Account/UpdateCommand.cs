@@ -22,7 +22,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Account
 
             if (entity == null)
             {
-                throw new NotFoundException();
+                throw new NotFoundException("Account {0} not found", id);
             }
 
             _partialUpdater.Apply(changedModel, entity);

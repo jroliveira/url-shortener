@@ -32,12 +32,12 @@ namespace UrlShortener.WebApi.Modules
             _exclude = exclude;
             _recover = recover;
 
-            Get["GetAccounts", "/"] = _ => HandleError(() => All());
-            Get["GetAccountById", "/{id}"] = parameters => HandleError(() => ById(parameters.id));
-            Post["PostAccount", "/"] = _ => HandleError(() => Create(this.Bind<Model.Post.Account>()));
-            Put["PutAccount", "/{id}"] = parameters => HandleError(() => Update(parameters.id, JsonConvert.DeserializeObject(Request.Body.AsString())));
-            Delete["DeleteAccount", "/{id}"] = parameters => HandleError(() => Exclude(parameters.id));
-            Post["RecoverAccount", "/{id}"] = parameters => HandleError(() => Recover(parameters.id));
+            Get["/"] = _ => HandleError(() => All());
+            Get["/{id}"] = parameters => HandleError(() => ById(parameters.id));
+            Post["/"] = _ => HandleError(() => Create(this.Bind<Model.Post.Account>()));
+            Put["/{id}"] = parameters => HandleError(() => Update(parameters.id, JsonConvert.DeserializeObject(Request.Body.AsString())));
+            Delete["/{id}"] = parameters => HandleError(() => Exclude(parameters.id));
+            Post["/{id}"] = parameters => HandleError(() => Recover(parameters.id));
         }
 
         private Response All()

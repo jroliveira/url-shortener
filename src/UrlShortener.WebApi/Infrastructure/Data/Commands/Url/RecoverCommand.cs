@@ -13,7 +13,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Url
 
             if (entity == null)
             {
-                throw new NotFoundException();
+                throw new NotFoundException("Url {0} not found", id);
             }
 
             entity.Recover();

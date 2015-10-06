@@ -22,7 +22,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
 
             if (model == null)
             {
-                throw new NotFoundException();
+                throw new NotFoundException("Resource 'accounts' with id {0} could not be found", id);
             }
 
             return model;
