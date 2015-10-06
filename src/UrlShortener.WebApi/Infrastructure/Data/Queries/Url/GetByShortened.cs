@@ -1,4 +1,6 @@
-﻿using Simple.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
 using Model = UrlShortener.WebApi.Models.Url;
 
@@ -12,33 +14,26 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
 
             dynamic accounts;
 
-            var data = db.Urls.All()
-                              .Join(db.Accounts, out accounts)
-                                  .On(db.Urls.AccountId == accounts.Id)
-                              .Select(
-                                  db.Urls.Id,
-                                  db.Urls.Address,
-                                  accounts.Id.As("AccountId"))
-                              .Where(
-                                  db.Urls.Shortened == shortened)
-                              .FirstOrDefault();
+            List<dynamic> data = db.Urls.All()
+                                        .Join(db.Accounts, out accounts)
+                                            .On(db.Urls.AccountId == accounts.Id)
+                                        .Select(
+                                            db.Urls.Id,
+                                            db.Urls.Address,
+                                            accounts.Id.As("Account_Id"))
+                                        .Where(
+                                            db.Urls.Shortened == shortened)
+                                        .FirstOrDefault();
 
-            if (data == null)
+            var model = Slapper.AutoMapper.MapDynamic<Model.Get.Url>(data)
+                                          .ToList();
+
+            if (model == null || !model.Any())
             {
                 throw new NotFoundException();
             }
 
-            var model = new Model.Get.Url
-            {
-                Id = data.Id,
-                Address = data.Address,
-                Account = new Model.Account
-                {
-                    Id = data.AccountId
-                }
-            };
-
-            return model;
+            return model.FirstOrDefault();
         }
     }
 }

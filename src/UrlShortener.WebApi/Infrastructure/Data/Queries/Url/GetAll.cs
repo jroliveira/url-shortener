@@ -24,30 +24,18 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
 
             dynamic accounts;
 
-            var data = db.Urls.All()
-                              .Join(db.Accounts, out accounts)
-                                  .On(db.Urls.AccountId == accounts.Id)
-                              .Select(
-                                  db.Urls.Id,
-                                  db.Urls.Address,
-                                  accounts.Id.As("AccountId"))
-                              .Skip(_skip.Apply(filter))
-                              .Take(_limit.Apply(filter));
+            List<dynamic> data = db.Urls.All()
+                                        .Join(db.Accounts, out accounts)
+                                            .On(db.Urls.AccountId == accounts.Id)
+                                        .Select(
+                                            db.Urls.Id,
+                                            db.Urls.Address,
+                                            accounts.Id.As("Account_Id"))
+                                        .Skip(_skip.Apply(filter))
+                                        .Take(_limit.Apply(filter));
 
-            var model = new List<Model.Get.Url>();
-
-            foreach (var item in data)
-            {
-                model.Add(new Model.Get.Url
-                {
-                    Id = item.Id,
-                    Address = item.Address,
-                    Account = new Model.Account
-                    {
-                        Id = item.AccountId
-                    }
-                });
-            }
+            var model = Slapper.AutoMapper.MapDynamic<Model.Get.Url>(data)
+                                          .ToList();
 
             if (model == null || !model.Any())
             {
