@@ -6,6 +6,7 @@ using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.Json;
 using Newtonsoft.Json;
+using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Filter.Data;
 using UrlShortener.WebApi.Infrastructure.Filter.Data.Simple.Data;
 using Commands = UrlShortener.WebApi.Infrastructure.Data.Commands;
@@ -50,6 +51,7 @@ namespace UrlShortener.WebApi.Lib
             /* Filters */
             existingContainer.Register<ISkip, Skip>();
             existingContainer.Register<ILimit, Limit>();
+            existingContainer.Register<IOrder<ObjectReference>, Order>();
 
             /* Commands */
             existingContainer.Register<Commands.Account.CreateCommand>();

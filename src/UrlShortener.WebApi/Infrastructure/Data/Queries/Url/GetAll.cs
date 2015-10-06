@@ -11,28 +11,40 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
     {
         private readonly ISkip _skip;
         private readonly ILimit _limit;
+        private readonly IOrder<ObjectReference> _order;
 
-        public GetAll(ISkip skip, ILimit limit)
+        public GetAll(ISkip skip, ILimit limit, IOrder<ObjectReference> order)
         {
             _skip = skip;
             _limit = limit;
+            _order = order;
         }
 
         public virtual IEnumerable<Model.Get.Url> GetResult(Filter.Filter filter)
         {
-            var db = Database.OpenNamedConnection("db");
+            filter.SetResource("Urls");
+
+            DataStrategy strategy = Database.OpenNamedConnection("db");
+
+            var query = new SimpleQuery(strategy, filter.Resource);
 
             dynamic accounts;
 
-            List<dynamic> data = db.Urls.All()
-                                        .Join(db.Accounts, out accounts)
-                                            .On(db.Urls.AccountId == accounts.Id)
-                                        .Select(
-                                            db.Urls.Id,
-                                            db.Urls.Address,
-                                            accounts.Id.As("Account_Id"))
-                                        .Skip(_skip.Apply(filter))
-                                        .Take(_limit.Apply(filter));
+            query = query.Join(ObjectReference.FromString("Accounts"), JoinType.Inner, out accounts)
+                             .On(accounts.Id == new ObjectReference("AccountId", ObjectReference.FromString("Urls")))
+                         .Select(
+                             new ObjectReference("Id", ObjectReference.FromString("Urls")),
+                             new ObjectReference("Address", ObjectReference.FromString("Urls")),
+                             new ObjectReference("Id", ObjectReference.FromString("Accounts")).As("Account_Id"))
+                         .Skip(_skip.Apply(filter))
+                         .Take(_limit.Apply(filter));
+
+            if (filter.HasOrder)
+            {
+                query = query.OrderBy(_order.Apply(filter), OrderByDirection.Ascending);
+            }
+
+            var data = query.ToList<dynamic>();
 
             var model = Slapper.AutoMapper.MapDynamic<Model.Get.Url>(data)
                                           .ToList();

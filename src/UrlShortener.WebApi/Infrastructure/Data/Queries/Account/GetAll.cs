@@ -11,28 +11,32 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
     {
         private readonly ISkip _skip;
         private readonly ILimit _limit;
+        private readonly IOrder<ObjectReference> _order;
 
-        public GetAll(ISkip skip, ILimit limit)
+        public GetAll(ISkip skip, ILimit limit, IOrder<ObjectReference> order)
         {
             _skip = skip;
             _limit = limit;
+            _order = order;
         }
 
         public virtual IEnumerable<Model.Account> GetResult(Filter.Filter filter)
         {
-            var db = Database.OpenNamedConnection("db");
+            filter.SetResource("Accounts");
 
-            List<Model.Account> model = db.Accounts.All()
-                                                   .Select(
-                                                       db.Accounts.Id,
-                                                       db.Accounts.Name,
-                                                       db.Accounts.Email)
-                                                   .Where(
-                                                       db.Accounts.Deleted == false)
-                                                   .Skip(_skip.Apply(filter))
-                                                   .Take(_limit.Apply(filter))
-                                                   .OrderBy(
-                                                       db.Accounts.Name);
+            DataStrategy strategy = Database.OpenNamedConnection("db");
+
+            var query = new SimpleQuery(strategy, filter.Resource);
+
+            query = query.Skip(_skip.Apply(filter))
+                         .Take(_limit.Apply(filter));
+
+            if (filter.HasOrder)
+            {
+                query = query.OrderBy(_order.Apply(filter), OrderByDirection.Ascending);
+            }
+
+            var model = query.ToList<Model.Account>();
 
             if (model == null || !model.Any())
             {
