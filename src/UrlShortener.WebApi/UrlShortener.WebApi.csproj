@@ -71,6 +71,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json.Schema">
+      <HintPath>..\..\packages\Newtonsoft.Json.Schema.1.0.11\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
+    </Reference>
     <Reference Include="Simple.Data">
       <HintPath>..\..\packages\Simple.Data.Core.0.19.0.0\lib\net40\Simple.Data.dll</HintPath>
     </Reference>
@@ -100,6 +103,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="YamlDotNet">
+      <HintPath>..\..\packages\YamlDotNet.3.7.0\lib\net35\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="swagger-ui\css\print.css" />
@@ -159,6 +165,7 @@
     <Compile Include="Infrastructure\Data\Queries\Url\GetByShortened.cs" />
     <Compile Include="Infrastructure\Exceptions\UrlShortenerException.cs" />
     <Compile Include="Infrastructure\Exceptions\NotFoundException.cs" />
+    <Compile Include="Infrastructure\Extensions\ResponseExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\StringsExtensions.cs" />
     <Compile Include="Infrastructure\Filter\Data\ILimit.cs" />
     <Compile Include="Infrastructure\Filter\Data\IOrder.cs" />
@@ -193,6 +200,7 @@
     <Compile Include="Models\Url\Post\Url.cs" />
     <Compile Include="Modules\AccountsModule.cs" />
     <Compile Include="Modules\BaseModule.cs" />
+    <Compile Include="Modules\DocsModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\UrlsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -208,7 +216,7 @@
     <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.woff" />
     <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.woff2" />
     <Content Include="swagger-ui\lib\underscore-min.map" />
-    <Content Include="swagger.json" />
+    <None Include="docs\swagger.yaml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

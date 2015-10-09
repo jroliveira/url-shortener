@@ -11,7 +11,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Account
 
             Entities.Account entity = db.Accounts.Get(id);
 
-            if (entity == null)
+            if (entity == null || entity.Deleted)
             {
                 throw new NotFoundException("Account {0} not found");
             }

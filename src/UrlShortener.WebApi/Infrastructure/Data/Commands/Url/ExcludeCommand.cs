@@ -11,7 +11,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Url
 
             Entities.Url entity = db.Urls.Get(id);
 
-            if (entity == null)
+            if (entity == null || entity.Deleted)
             {
                 throw new NotFoundException("Url {0} not found", id);
             }
