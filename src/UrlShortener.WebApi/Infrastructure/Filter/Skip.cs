@@ -19,7 +19,7 @@ namespace UrlShortener.WebApi.Infrastructure.Filter
         public static implicit operator Skip(string query)
         {
             const string regex = @"filter\[skip]\=(?<skip>\d+)";
-            var match = Regex.Match(query, regex);
+            var match = Regex.Match(query, regex, RegexOptions.IgnoreCase);
 
             int skip;
 

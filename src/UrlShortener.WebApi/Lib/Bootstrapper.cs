@@ -52,6 +52,8 @@ namespace UrlShortener.WebApi.Lib
             existingContainer.Register<ISkip, Skip>();
             existingContainer.Register<ILimit, Limit>();
             existingContainer.Register<IOrder<ObjectReference>, Order>();
+            existingContainer.Register<IOrderDirection<OrderByDirection>, OrderDirection>();
+            existingContainer.Register<IWhere<SimpleExpression>, Where>();
 
             /* Commands */
             existingContainer.Register<Commands.Account.CreateCommand>();

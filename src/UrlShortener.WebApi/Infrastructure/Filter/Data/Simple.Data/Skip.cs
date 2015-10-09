@@ -2,13 +2,6 @@
 {
     public class Skip : ISkip
     {
-        private readonly ILimit _limit;
-
-        public Skip(ILimit limit)
-        {
-            _limit = limit;
-        }
-
         public int Apply(Filter filter)
         {
             if (filter.Skip == null)
@@ -21,14 +14,7 @@
                 return 0;
             }
 
-            int skip = filter.Skip;
-
-            if (filter.Limit != null)
-            {
-                skip = filter.Skip * _limit.Apply(filter);
-            }
-
-            return skip;
+            return filter.Skip;
         }
     }
 }

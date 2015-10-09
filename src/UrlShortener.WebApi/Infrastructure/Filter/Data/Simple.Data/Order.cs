@@ -6,11 +6,6 @@ namespace UrlShortener.WebApi.Infrastructure.Filter.Data.Simple.Data
     {
         public ObjectReference Apply(Filter filter)
         {
-            if (filter.Order == null)
-            {
-                return null;
-            }
-
             var owner = ObjectReference.FromString(filter.Resource);
             var name = filter.Order.Property;
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace UrlShortener.WebApi.Infrastructure.Filter
+namespace UrlShortener.WebApi.Infrastructure.Filter.Order
 {
     public class Order
     {
@@ -41,7 +41,7 @@ namespace UrlShortener.WebApi.Infrastructure.Filter
 
             const string regex = @"filter\[order]\=(?<property>\w+)(,(%20)?(?<property>\w+))*%20(?<sorts>ASC|DESC)";
 
-            var match = Regex.Match(query, regex);
+            var match = Regex.Match(query, regex, RegexOptions.IgnoreCase);
             var sortsType = match.Groups["sorts"].Value;
 
             if (string.IsNullOrEmpty(sortsType))
@@ -49,13 +49,13 @@ namespace UrlShortener.WebApi.Infrastructure.Filter
                 return Sorts.Asc;
             }
 
-            return sortsTypes[sortsType];
+            return sortsTypes[sortsType.ToUpper()];
         }
 
         private static ICollection<string> GetProperties(string query)
         {
             const string regex = @"filter\[order]\=(?<property>\w+)(,(%20)?(?<property>\w+))*%20(?<sorts>ASC|DESC)";
-            var matches = Regex.Matches(query, regex);
+            var matches = Regex.Matches(query, regex, RegexOptions.IgnoreCase);
 
             var properties = new List<string>();
 

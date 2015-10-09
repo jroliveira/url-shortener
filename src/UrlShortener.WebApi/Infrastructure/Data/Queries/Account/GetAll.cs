@@ -11,13 +11,21 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
     {
         private readonly ISkip _skip;
         private readonly ILimit _limit;
+        private readonly IWhere<SimpleExpression> _where;
         private readonly IOrder<ObjectReference> _order;
-
-        public GetAll(ISkip skip, ILimit limit, IOrder<ObjectReference> order)
+        private readonly IOrderDirection<OrderByDirection> _orderDirection;
+        
+        public GetAll(ISkip skip,
+                      ILimit limit,
+                      IWhere<SimpleExpression> where,
+                      IOrder<ObjectReference> order,
+                      IOrderDirection<OrderByDirection> orderDirection)
         {
             _skip = skip;
             _limit = limit;
+            _where = where;
             _order = order;
+            _orderDirection = orderDirection;
         }
 
         public virtual IEnumerable<Model.Account> GetResult(Filter.Filter filter)
@@ -31,9 +39,14 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
             query = query.Skip(_skip.Apply(filter))
                          .Take(_limit.Apply(filter));
 
+            if (filter.HasWhere)
+            {
+                query = query.Where(_where.Apply(filter));
+            }
+
             if (filter.HasOrder)
             {
-                query = query.OrderBy(_order.Apply(filter), OrderByDirection.Ascending);
+                query = query.OrderBy(_order.Apply(filter), _orderDirection.Apply(filter));
             }
 
             var model = query.ToList<Model.Account>();

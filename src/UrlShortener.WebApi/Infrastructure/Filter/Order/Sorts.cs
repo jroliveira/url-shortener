@@ -1,4 +1,4 @@
-﻿namespace UrlShortener.WebApi.Infrastructure.Filter
+﻿namespace UrlShortener.WebApi.Infrastructure.Filter.Order
 {
     public enum Sorts
     {
