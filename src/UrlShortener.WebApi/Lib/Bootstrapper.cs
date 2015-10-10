@@ -37,7 +37,7 @@ namespace UrlShortener.WebApi.Lib
 
         protected override void ConfigureConventions(NancyConventions nancyConventions)
         {
-            nancyConventions.StaticContentsConventions.AddDirectory("docs", "swagger-ui");
+            nancyConventions.StaticContentsConventions.AddDirectory("public", "public");
         }
 
         protected override void ConfigureApplicationContainer(IServiceContainer existingContainer)

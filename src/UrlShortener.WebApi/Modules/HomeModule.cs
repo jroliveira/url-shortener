@@ -6,7 +6,7 @@ namespace UrlShortener.WebApi.Modules
     {
         public HomeModule()
         {
-            Get["/"] = _ => "running";
+            Get["/"] = _ => View["index.html"];
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Nancy;
-using Nancy.Responses;
 using Newtonsoft.Json;
 using YamlDotNet.Serialization;
 

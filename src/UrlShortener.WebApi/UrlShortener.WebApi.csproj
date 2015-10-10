@@ -108,42 +108,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="swagger-ui\css\print.css" />
-    <Content Include="swagger-ui\css\reset.css" />
-    <Content Include="swagger-ui\css\screen.css" />
-    <Content Include="swagger-ui\css\style.css" />
-    <Content Include="swagger-ui\css\typography.css" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.svg" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.svg" />
-    <Content Include="swagger-ui\images\explorer_icons.png" />
-    <Content Include="swagger-ui\images\favicon-16x16.png" />
-    <Content Include="swagger-ui\images\favicon-32x32.png" />
-    <Content Include="swagger-ui\images\favicon.ico" />
-    <Content Include="swagger-ui\images\logo_small.png" />
-    <Content Include="swagger-ui\images\pet_store_api.png" />
-    <Content Include="swagger-ui\images\throbber.gif" />
-    <Content Include="swagger-ui\images\wordnik_api.png" />
-    <Content Include="swagger-ui\index.html" />
-    <Content Include="swagger-ui\lang\en.js" />
-    <Content Include="swagger-ui\lang\es.js" />
-    <Content Include="swagger-ui\lang\pt.js" />
-    <Content Include="swagger-ui\lang\ru.js" />
-    <Content Include="swagger-ui\lang\tr.js" />
-    <Content Include="swagger-ui\lang\translator.js" />
-    <Content Include="swagger-ui\lang\zh-cn.js" />
-    <Content Include="swagger-ui\lib\backbone-min.js" />
-    <Content Include="swagger-ui\lib\handlebars-2.0.0.js" />
-    <Content Include="swagger-ui\lib\highlight.7.3.pack.js" />
-    <Content Include="swagger-ui\lib\jquery-1.8.0.min.js" />
-    <Content Include="swagger-ui\lib\jquery.ba-bbq.min.js" />
-    <Content Include="swagger-ui\lib\jquery.slideto.min.js" />
-    <Content Include="swagger-ui\lib\jquery.wiggle.min.js" />
-    <Content Include="swagger-ui\lib\marked.js" />
-    <Content Include="swagger-ui\lib\swagger-oauth.js" />
-    <Content Include="swagger-ui\lib\underscore-min.js" />
-    <Content Include="swagger-ui\o2c.html" />
-    <Content Include="swagger-ui\swagger-ui.js" />
-    <Content Include="swagger-ui\swagger-ui.min.js" />
+    <Content Include="public\css\print.css" />
+    <Content Include="public\css\reset.css" />
+    <Content Include="public\css\screen.css" />
+    <Content Include="public\css\style.css" />
+    <Content Include="public\css\typography.css" />
+    <Content Include="public\fonts\droid-sans-v6-latin-700.svg" />
+    <Content Include="public\fonts\droid-sans-v6-latin-regular.svg" />
+    <Content Include="Views\Home\index.html" />
+    <Content Include="public\lang\en.js" />
+    <Content Include="public\lang\es.js" />
+    <Content Include="public\lang\pt.js" />
+    <Content Include="public\lang\ru.js" />
+    <Content Include="public\lang\tr.js" />
+    <Content Include="public\lang\translator.js" />
+    <Content Include="public\lang\zh-cn.js" />
+    <Content Include="public\lib\backbone-min.js" />
+    <Content Include="public\lib\handlebars-2.0.0.js" />
+    <Content Include="public\lib\highlight.7.3.pack.js" />
+    <Content Include="public\lib\jquery-1.8.0.min.js" />
+    <Content Include="public\lib\jquery.ba-bbq.min.js" />
+    <Content Include="public\lib\jquery.slideto.min.js" />
+    <Content Include="public\lib\jquery.wiggle.min.js" />
+    <Content Include="public\lib\marked.js" />
+    <Content Include="public\lib\swagger-oauth.js" />
+    <Content Include="public\lib\underscore-min.js" />
+    <Content Include="Views\Home\o2c.html" />
+    <Content Include="public\swagger-ui.js" />
+    <Content Include="public\swagger-ui.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -214,16 +206,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.eot" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.ttf" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.woff" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-700.woff2" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.eot" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.ttf" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.woff" />
-    <Content Include="swagger-ui\fonts\droid-sans-v6-latin-regular.woff2" />
-    <Content Include="swagger-ui\lib\underscore-min.map" />
-    <None Include="docs\swagger.yaml" />
+    <Content Include="public\fonts\droid-sans-v6-latin-700.eot" />
+    <Content Include="public\fonts\droid-sans-v6-latin-700.ttf" />
+    <Content Include="public\fonts\droid-sans-v6-latin-700.woff" />
+    <Content Include="public\fonts\droid-sans-v6-latin-700.woff2" />
+    <Content Include="public\fonts\droid-sans-v6-latin-regular.eot" />
+    <Content Include="public\fonts\droid-sans-v6-latin-regular.ttf" />
+    <Content Include="public\fonts\droid-sans-v6-latin-regular.woff" />
+    <Content Include="public\fonts\droid-sans-v6-latin-regular.woff2" />
+    <Content Include="public\lib\underscore-min.map" />
+    <Content Include="docs\swagger.yaml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
