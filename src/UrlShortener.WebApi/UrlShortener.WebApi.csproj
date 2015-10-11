@@ -71,9 +71,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json.Schema">
-      <HintPath>..\..\packages\Newtonsoft.Json.Schema.1.0.11\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
-    </Reference>
     <Reference Include="Simple.Data">
       <HintPath>..\..\packages\Simple.Data.Core.0.19.0.0\lib\net40\Simple.Data.dll</HintPath>
     </Reference>
@@ -108,6 +105,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="docs\definitions\account\post.yaml" />
+    <Content Include="docs\resolve.js" />
     <Content Include="public\css\print.css" />
     <Content Include="public\css\reset.css" />
     <Content Include="public\css\screen.css" />
@@ -216,6 +215,18 @@
     <Content Include="public\fonts\droid-sans-v6-latin-regular.woff2" />
     <Content Include="public\lib\underscore-min.map" />
     <Content Include="docs\swagger.yaml" />
+    <Content Include="docs\definitions\account\put.yaml" />
+    <Content Include="docs\definitions\account\get.yaml" />
+    <Content Include="docs\package.json" />
+    <Content Include="docs\info.yaml" />
+    <Content Include="docs\paths\paths.yaml" />
+    <Content Include="docs\paths\account\get-all.yaml" />
+    <Content Include="docs\paths\account\post.yaml" />
+    <Content Include="docs\paths\account\get-by-id.yaml" />
+    <Content Include="docs\paths\account\put.yaml" />
+    <Content Include="docs\paths\account\delete.yaml" />
+    <Content Include="docs\swagger.json" />
+    <Content Include="docs\tags\account.yaml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

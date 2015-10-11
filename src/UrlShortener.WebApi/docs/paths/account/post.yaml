@@ -1,0 +1,21 @@
+tags: 
+  - "account"
+summary: "Add a new account to the store"
+operationId: "addAccount"
+consumes: 
+  - "application/json"
+produces: 
+  - "application/json"
+parameters: 
+  - 
+    in: "body"
+    name: "body"
+    description: "Account object that needs to be added to the store"
+    required: true
+    schema: 
+      $ref: ./../../definitions/account/post.yaml
+responses: 
+  201: 
+    description: "Created a account"
+  422: 
+    description: "Invalid input"

@@ -1,0 +1,30 @@
+tags: 
+  - "account"
+summary: "Update an existing account"
+operationId: "updateAccount"
+consumes: 
+  - "application/json"
+produces: 
+  - "application/json"
+parameters: 
+  - 
+    name: "id"
+    in: "path"
+    description: "ID of account to update"
+    required: true
+    type: "integer"
+    format: "int32"
+  - 
+    in: "body"
+    name: "body"
+    description: "Account object that needs to be added to the store"
+    required: true
+    schema: 
+      $ref: ./../../definitions/account/put.yaml
+responses: 
+  204: 
+    description: "Updated a account"
+  404: 
+    description: "Account not found"
+  422: 
+    description: "Invalid input"

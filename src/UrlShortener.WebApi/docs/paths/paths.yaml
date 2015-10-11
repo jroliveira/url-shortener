@@ -1,0 +1,13 @@
+/accounts: 
+  post: 
+    $ref: ./account/post.yaml
+  get: 
+    $ref: ./account/get-all.yaml
+
+/accounts/{id}: 
+  get: 
+    $ref: ./account/get-by-id.yaml
+  put: 
+    $ref: ./account/put.yaml
+  delete: 
+    $ref: ./account/delete.yaml

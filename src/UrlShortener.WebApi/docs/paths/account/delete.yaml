@@ -1,0 +1,19 @@
+tags: 
+  - "account"
+summary: "Deletes a account"
+operationId: "deleteAccount"
+produces: 
+  - "application/json"
+parameters: 
+  - 
+    name: "id"
+    in: "path"
+    description: "ID of account to delete"
+    required: true
+    type: "integer"
+    format: "int32"
+responses: 
+  204: 
+    description: "Updated a account"
+  404: 
+    description: "Account not found"

@@ -1,0 +1,14 @@
+tags: 
+  - "account"
+summary: "Finds Accounts"
+description: "Returns all accounts"
+operationId: "getAccounts"
+produces: 
+  - "application/json"
+responses: 
+  200: 
+    description: "successful operation"
+    schema: 
+      type: "array"
+      items: 
+        $ref: ./../../definitions/account/get.yaml

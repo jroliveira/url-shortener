@@ -1,0 +1,11 @@
+type: "object"
+properties: 
+  id: 
+    type: "integer"
+    format: "int32"
+  name: 
+    type: "string"
+  email: 
+    type: "string"
+xml: 
+  name: "AccountGet"

@@ -1,0 +1,13 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "Web Api feita em Nancy.",
+  "main": "resolve.js",
+  "scripts": {
+    "start": "node --harmony resolve.js"
+  },
+  "dependencies": {
+    "json-refs": "^1.1.1",
+    "yaml-js": "^0.1.3"
+  }
+}

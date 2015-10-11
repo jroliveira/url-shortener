@@ -1,8 +1,5 @@
-﻿using System.IO;
-using Nancy;
-using Newtonsoft.Json;
-using YamlDotNet.Serialization;
-
+﻿using Nancy;
+using Nancy.Responses;
 
 namespace UrlShortener.WebApi.Modules
 {
@@ -20,27 +17,9 @@ namespace UrlShortener.WebApi.Modules
 
         private Response Index()
         {
-            var deserializer = new Deserializer();
-            var serializer = new JsonSerializer();
+            var file = _pathProvider.GetRootPath() + "docs\\swagger.json";
 
-            var file = _pathProvider.GetRootPath() + @"docs\swagger.yaml";
-
-            using (var streamReader = new StreamReader(file))
-            {
-                var yamlObject = deserializer.Deserialize(streamReader);
-
-                using (var stringWriter = new StringWriter())
-                {
-                    using (var jsonWriter = new JsonTextWriter(stringWriter))
-                    {
-                        serializer.Serialize(jsonWriter, yamlObject);
-
-                        var json = stringWriter.ToString();
-
-                        return json;
-                    }
-                }
-            }
+            return new GenericFileResponse(file, "application/json");
         }
     }
 }
