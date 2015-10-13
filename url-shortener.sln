@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "readme", "readme", "{71780A
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E4A0D130-907D-4120-8390-E326B6EA2CD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.WebApi.Test", "test\UrlShortener.WebApi.Test\UrlShortener.WebApi.Test.csproj", "{17ED0A53-B02E-4025-9DC5-511F3A0166B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +37,15 @@ Global
 		{4ABDA6D7-6202-4296-88A9-85D8B03207DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ABDA6D7-6202-4296-88A9-85D8B03207DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ABDA6D7-6202-4296-88A9-85D8B03207DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17ED0A53-B02E-4025-9DC5-511F3A0166B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17ED0A53-B02E-4025-9DC5-511F3A0166B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17ED0A53-B02E-4025-9DC5-511F3A0166B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17ED0A53-B02E-4025-9DC5-511F3A0166B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{17ED0A53-B02E-4025-9DC5-511F3A0166B2} = {E4A0D130-907D-4120-8390-E326B6EA2CD8}
 	EndGlobalSection
 EndGlobal
