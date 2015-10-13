@@ -1,6 +1,7 @@
 # URL Shortener
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ufy2x69giu07g27j?svg=true)](https://ci.appveyor.com/project/junioro/url-shortener)
+[![Build Status](https://travis-ci.org/jroliveira/url-shortener.svg?branch=master)](https://travis-ci.org/jroliveira/url-shortener)
 
 Web Api feita em Nancy.
 

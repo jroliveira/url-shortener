@@ -1,0 +1,7 @@
+language: csharp
+solution: url-shortener.sln
+env:
+ matrix:
+  - MONO_VERSION="3.8.0"
+script:
+ - xbuild /verbosity:minimal /p:Configuration=Release url-shortener.sln
