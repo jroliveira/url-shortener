@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using LightInject;
-using LightInject.Nancy;
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.Json;
+using Nancy.TinyIoc;
 using Newtonsoft.Json;
 using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Filter.Data;
@@ -14,9 +13,9 @@ using Queries = UrlShortener.WebApi.Infrastructure.Data.Queries;
 
 namespace UrlShortener.WebApi.Lib
 {
-    public class Bootstrapper : LightInjectNancyBootstrapper
+    public class Bootstrapper : DefaultNancyBootstrapper
     {
-        protected override void ApplicationStartup(IServiceContainer container, IPipelines pipelines)
+        protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             JsonSettings.MaxJsonLength = int.MaxValue;
 
@@ -25,7 +24,7 @@ namespace UrlShortener.WebApi.Lib
             base.ApplicationStartup(container, pipelines);
         }
 
-        protected override void RequestStartup(IServiceContainer container, IPipelines pipelines, NancyContext context)
+        protected override void RequestStartup(TinyIoCContainer container, IPipelines pipelines, NancyContext context)
         {
             pipelines.AfterRequest.AddItemToEndOfPipeline(ctx => ctx.Response
                 .WithHeader("Access-Control-Allow-Origin", "*")
@@ -40,13 +39,13 @@ namespace UrlShortener.WebApi.Lib
             nancyConventions.StaticContentsConventions.AddDirectory("public", "public");
         }
 
-        protected override void ConfigureApplicationContainer(IServiceContainer existingContainer)
+        protected override void ConfigureApplicationContainer(TinyIoCContainer existingContainer)
         {
             base.ConfigureApplicationContainer(existingContainer);
 
             existingContainer.Register<JsonSerializer, CustomJsonSerializer>();
             existingContainer.Register<PartialUpdater>();
-            existingContainer.Register(factory => Mapper.Engine);
+            existingContainer.Register(Mapper.Engine);
 
             /* Filters */
             existingContainer.Register<ISkip, Skip>();
