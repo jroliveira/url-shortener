@@ -22,7 +22,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
 
         public virtual IEnumerable<Model.Get.Url> GetResult(Filter.Filter filter)
         {
-            filter.SetResource("Urls");
+            filter.Resource = "Urls";
 
             DataStrategy strategy = Database.OpenNamedConnection("db");
 

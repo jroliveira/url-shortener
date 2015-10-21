@@ -59,6 +59,11 @@
   <ItemGroup>
     <Compile Include="Entities\AccountTests.cs" />
     <Compile Include="Entities\UrlTests.cs" />
+    <Compile Include="Infrastructure\Filter\PropertyTests.cs" />
+    <Compile Include="Infrastructure\Filter\OrderTests.cs" />
+    <Compile Include="Infrastructure\Filter\FilterTests.cs" />
+    <Compile Include="Infrastructure\Filter\LimitTests.cs" />
+    <Compile Include="Infrastructure\Filter\SkipTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

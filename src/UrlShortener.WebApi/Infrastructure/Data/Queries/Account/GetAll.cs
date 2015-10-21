@@ -30,7 +30,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
 
         public virtual IEnumerable<Model.Account> GetResult(Filter.Filter filter)
         {
-            filter.SetResource("Accounts");
+            filter.Resource = "Accounts";
 
             DataStrategy strategy = Database.OpenNamedConnection("db");
 

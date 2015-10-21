@@ -42,7 +42,7 @@ namespace UrlShortener.WebApi.Infrastructure.Filter.Where
                 { "lt", Operator.LessThan }
             };
 
-            var operation = match.Groups["op"].Value;
+            var operation = match.Groups["op"].Value.ToLower();
             if (string.IsNullOrEmpty(operation))
             {
                 return null;
