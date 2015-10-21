@@ -4,7 +4,7 @@
     {
         private const string Base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
-        public string Shorten(string text)
+        public virtual string Shorten(string text)
         {
             var hashCode = text.GetHashCode();
 

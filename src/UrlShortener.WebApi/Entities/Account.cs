@@ -10,9 +10,15 @@ namespace UrlShortener.WebApi.Entities
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public Account()
+        internal Account(IHashAlgorithm hashAlgorithm)
         {
-            _hashAlgorithm = new Md5HashAlgorithm();
+            _hashAlgorithm = hashAlgorithm;
+        }
+
+        public Account()
+            : this(new Md5HashAlgorithm())
+        {
+
         }
 
         public void HashPassword()

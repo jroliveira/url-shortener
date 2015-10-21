@@ -10,9 +10,15 @@ namespace UrlShortener.WebApi.Entities
         public Account Account { get; set; }
         public string Shortened { get; private set; }
 
-        public Url()
+        internal Url(Shortener shortener)
         {
-            _shortener = new Shortener();
+            _shortener = shortener;
+        }
+
+        public Url()
+            : this(new Shortener())
+        {
+
         }
 
         public void Shorten()
