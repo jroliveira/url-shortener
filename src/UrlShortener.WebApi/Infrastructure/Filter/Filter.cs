@@ -2,10 +2,10 @@ namespace UrlShortener.WebApi.Infrastructure.Filter
 {
     public class Filter
     {
-        public string Resource { get; set; }
-        public Limit Limit { get; private set; }
-        public Skip Skip { get; private set; }
-        public Order.Order Order { get; private set; }
+        public virtual string Resource { get; set; }
+        public virtual Limit Limit { get; private set; }
+        public virtual Skip Skip { get; private set; }
+        public virtual Order.Order Order { get; private set; }
         public Where.Where Where { get; private set; }
 
         public bool HasOrder { get { return Order != null; } }

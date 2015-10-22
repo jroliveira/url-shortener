@@ -4,9 +4,14 @@ namespace UrlShortener.WebApi.Infrastructure.Filter
 {
     public class Limit
     {
-        public int Value { get; protected set; }
+        public virtual int Value { get; protected set; }
 
-        protected Limit(int value)
+        protected Limit()
+        {
+            
+        }
+
+        private Limit(int value)
         {
             Value = value;
         }

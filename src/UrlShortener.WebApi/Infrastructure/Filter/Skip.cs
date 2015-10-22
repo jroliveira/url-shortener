@@ -4,9 +4,14 @@ namespace UrlShortener.WebApi.Infrastructure.Filter
 {
     public class Skip
     {
-        public int Value { get; protected set; }
+        public virtual int Value { get; protected set; }
 
-        protected Skip(int value)
+        protected Skip()
+        {
+
+        }
+
+        private Skip(int value)
         {
             Value = value;
         }

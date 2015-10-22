@@ -8,10 +8,15 @@ namespace UrlShortener.WebApi.Infrastructure.Filter.Order
     {
         private readonly ICollection<string> _properties;
 
-        public Sorts Sorts { get; protected set; }
-        public string Property { get { return _properties.First(); } }
+        public virtual Sorts Sorts { get; protected set; }
+        public virtual string Property { get { return _properties.First(); } }
 
-        public Order(ICollection<string> properties, Sorts sorts)
+        protected Order()
+        {
+            
+        }
+
+        private Order(ICollection<string> properties, Sorts sorts)
         {
             _properties = properties;
             Sorts = sorts;
