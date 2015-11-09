@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Simple.Data;
+using UrlShortener.WebApi.Infrastructure.Data.Filter;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
-using UrlShortener.WebApi.Infrastructure.Filter.Data;
 using Model = UrlShortener.WebApi.Models.Account.Get;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
 {
     public class GetAll
     {
-        private readonly ISkip _skip;
-        private readonly ILimit _limit;
-        private readonly IWhere<SimpleExpression> _where;
-        private readonly IOrder<ObjectReference> _order;
-        private readonly IOrderDirection<OrderByDirection> _orderDirection;
-        
-        public GetAll(ISkip skip,
-                      ILimit limit,
-                      IWhere<SimpleExpression> where,
-                      IOrder<ObjectReference> order,
-                      IOrderDirection<OrderByDirection> orderDirection)
+        private readonly ISkip<Filter.Simple.Data.Filter> _skip;
+        private readonly ILimit<Filter.Simple.Data.Filter> _limit;
+        private readonly IWhere<Filter.Simple.Data.Filter, SimpleExpression> _where;
+        private readonly IOrder<Filter.Simple.Data.Filter, ObjectReference> _order;
+        private readonly IOrderDirection<Filter.Simple.Data.Filter, OrderByDirection> _orderDirection;
+
+        public GetAll(ISkip<Filter.Simple.Data.Filter> skip,
+                      ILimit<Filter.Simple.Data.Filter> limit,
+                      IWhere<Filter.Simple.Data.Filter, SimpleExpression> where,
+                      IOrder<Filter.Simple.Data.Filter, ObjectReference> order,
+                      IOrderDirection<Filter.Simple.Data.Filter, OrderByDirection> orderDirection)
         {
             _skip = skip;
             _limit = limit;
@@ -28,7 +28,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
             _orderDirection = orderDirection;
         }
 
-        public virtual IEnumerable<Model.Account> GetResult(Filter.Filter filter)
+        public virtual IEnumerable<Model.Account> GetResult(Filter.Simple.Data.Filter filter)
         {
             filter.Resource = "Accounts";
 
@@ -53,7 +53,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
 
             if (model == null || !model.Any())
             {
-                throw new NotFoundException("Resource 'accounts' with filter passed could not be found");
+                return null;
             }
 
             return model;

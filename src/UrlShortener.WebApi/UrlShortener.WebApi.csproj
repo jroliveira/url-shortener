@@ -41,8 +41,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AutoMapper.4.0.4\lib\net40\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.4.1.1\lib\net40\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FluentMigrator, Version=1.6.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
@@ -66,6 +66,10 @@
       <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Restful.Query.Filter, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Restful.Query.Filter.1.0.0.2\lib\net40\Restful.Query.Filter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Simple.Data, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Simple.Data.Core.0.19.0.0\lib\net40\Simple.Data.dll</HintPath>
       <Private>True</Private>
@@ -82,11 +86,19 @@
       <HintPath>..\..\packages\Slapper.AutoMapper.1.0.0.6\lib\Slapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime, Version=2.6.9.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Bcl.1.1.9\lib\net40\System.Runtime.dll</HintPath>
+    <Reference Include="System" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +147,7 @@
     <Compile Include="Infrastructure\Data\Commands\Url\CreateCommand.cs" />
     <Compile Include="Infrastructure\Data\Commands\Url\ExcludeCommand.cs" />
     <Compile Include="Infrastructure\Data\Commands\Url\RecoverCommand.cs" />
+    <Compile Include="Infrastructure\Data\Filter\Simple.Data\Filter.cs" />
     <Compile Include="Infrastructure\Data\Queries\Account\GetAll.cs" />
     <Compile Include="Infrastructure\Data\Queries\Account\GetById.cs" />
     <Compile Include="Infrastructure\Data\Queries\Url\GetAll.cs" />
@@ -143,41 +156,30 @@
     <Compile Include="Infrastructure\Exceptions\NotFoundException.cs" />
     <Compile Include="Infrastructure\Extensions\ResponseExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\StringsExtensions.cs" />
-    <Compile Include="Infrastructure\Filter\Data\IOrderDirection.cs" />
-    <Compile Include="Infrastructure\Filter\Data\IWhere.cs" />
-    <Compile Include="Infrastructure\Filter\Data\ILimit.cs" />
-    <Compile Include="Infrastructure\Filter\Data\IOrder.cs" />
-    <Compile Include="Infrastructure\Filter\Data\ISkip.cs" />
-    <Compile Include="Infrastructure\Filter\Data\Simple.Data\OrderDirection.cs" />
-    <Compile Include="Infrastructure\Filter\Data\Simple.Data\Where.cs" />
-    <Compile Include="Infrastructure\Filter\Data\Simple.Data\Limit.cs" />
-    <Compile Include="Infrastructure\Filter\Data\Simple.Data\Order.cs" />
-    <Compile Include="Infrastructure\Filter\Data\Simple.Data\Skip.cs" />
-    <Compile Include="Infrastructure\Filter\Filter.cs" />
-    <Compile Include="Infrastructure\Filter\Limit.cs" />
-    <Compile Include="Infrastructure\Filter\Order\Order.cs" />
-    <Compile Include="Infrastructure\Filter\Skip.cs" />
+    <Compile Include="Infrastructure\Data\Filter\IOrderDirection.cs" />
+    <Compile Include="Infrastructure\Data\Filter\IWhere.cs" />
+    <Compile Include="Infrastructure\Data\Filter\ILimit.cs" />
+    <Compile Include="Infrastructure\Data\Filter\IOrder.cs" />
+    <Compile Include="Infrastructure\Data\Filter\ISkip.cs" />
+    <Compile Include="Infrastructure\Data\Filter\Simple.Data\OrderDirection.cs" />
+    <Compile Include="Infrastructure\Data\Filter\Simple.Data\Where.cs" />
+    <Compile Include="Infrastructure\Data\Filter\Simple.Data\Limit.cs" />
+    <Compile Include="Infrastructure\Data\Filter\Simple.Data\Order.cs" />
+    <Compile Include="Infrastructure\Data\Filter\Simple.Data\Skip.cs" />
     <Compile Include="Infrastructure\Data\Migrations\2015\09\29\CreateUrlsTable.cs" />
     <Compile Include="Infrastructure\Data\Migrations\2015\09\29\Main.cs" />
     <Compile Include="Infrastructure\Data\Migrations\2015\09\29\CreateAccountsTable.cs" />
-    <Compile Include="Infrastructure\Filter\Order\Sorts.cs" />
-    <Compile Include="Infrastructure\Filter\Where\Operator.cs" />
-    <Compile Include="Infrastructure\Filter\Where\Where.cs" />
-    <Compile Include="Infrastructure\Filter\Where\Property.cs" />
     <Compile Include="Infrastructure\Security\IHashAlgorithm.cs" />
     <Compile Include="Infrastructure\Security\Md5HashAlgorithm.cs" />
-    <Compile Include="Infrastructure\Shortener.cs" />
-    <Compile Include="Lib\Bootstrapper.cs" />
-    <Compile Include="Lib\CustomJsonSerializer.cs" />
-    <Compile Include="Lib\Mappings\AccountProfile.cs" />
-    <Compile Include="Lib\Mappings\UrlProfile.cs" />
-    <Compile Include="Lib\PartialUpdater.cs" />
-    <Compile Include="Lib\Validators\Account\Post\AccountValidator.cs" />
-    <Compile Include="Lib\Validators\Account\Put\AccountValidator.cs" />
-    <Compile Include="Lib\Validators\Url\UrlValidator.cs" />
+    <Compile Include="Infrastructure\Bootstrapper.cs" />
+    <Compile Include="Infrastructure\CustomJsonSerializer.cs" />
+    <Compile Include="Infrastructure\Mappings\AccountProfile.cs" />
+    <Compile Include="Infrastructure\Mappings\UrlProfile.cs" />
+    <Compile Include="Infrastructure\PartialUpdater.cs" />
+    <Compile Include="Infrastructure\Validators\AccountValidator.cs" />
+    <Compile Include="Infrastructure\Validators\UrlValidator.cs" />
     <Compile Include="Models\Account\Get\Account.cs" />
     <Compile Include="Models\Account\Post\Account.cs" />
-    <Compile Include="Models\Account\Put\Account.cs" />
     <Compile Include="Models\Url\Account.cs" />
     <Compile Include="Models\Url\Get\Url.cs" />
     <Compile Include="Models\Url\Post\Url.cs" />

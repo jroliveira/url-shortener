@@ -1,29 +1,14 @@
-﻿using UrlShortener.WebApi.Infrastructure;
-
-namespace UrlShortener.WebApi.Entities
+﻿namespace UrlShortener.WebApi.Entities
 {
     public class Url : Entity<int>
     {
-        private readonly Shortener _shortener;
+        public virtual string Address { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual string Shortened { get; private set; }
 
-        public string Address { get; set; }
-        public Account Account { get; set; }
-        public string Shortened { get; private set; }
-
-        internal Url(Shortener shortener)
+        public virtual void Shorten()
         {
-            _shortener = shortener;
-        }
-
-        public Url()
-            : this(new Shortener())
-        {
-
-        }
-
-        public void Shorten()
-        {
-            Shortened = _shortener.Shorten(Address);
+            Shortened = string.Format("{0:X}", Address.GetHashCode()).ToLower();
         }
     }
 }

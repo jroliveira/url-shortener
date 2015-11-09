@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using UrlShortener.WebApi.Lib.Mappings;
+using UrlShortener.WebApi.Infrastructure.Mappings;
 
 namespace UrlShortener.WebApi
 {

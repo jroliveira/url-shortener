@@ -1,8 +1,8 @@
 ﻿using System;
 using Nancy;
+using UrlShortener.WebApi.Infrastructure.Data.Filter.Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
 using UrlShortener.WebApi.Infrastructure.Extensions;
-using UrlShortener.WebApi.Infrastructure.Filter;
 
 namespace UrlShortener.WebApi.Modules
 {
@@ -34,7 +34,7 @@ namespace UrlShortener.WebApi.Modules
         {
             var filter = Request.Url.Query;
 
-            return filter;
+            return new Filter(filter);
         }
     }
 }

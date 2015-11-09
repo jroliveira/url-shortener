@@ -10,34 +10,25 @@ namespace UrlShortener.WebApi.Test.Entities
     public class UrlTests
     {
         private Url _url;
-        private Mock<Shortener> _shortenerMock;
 
         [SetUp]
         public void SetUp()
         {
-            _shortenerMock = new Mock<Shortener>();
-
-            _url = new Url(_shortenerMock.Object);
+            _url = new Url();
         }
 
-        [Test]
-        public void Shorten_DeveChamarShortenerUmaVez()
+        [TestCase("http://jroliveira.net", "8edd484c")]
+        [TestCase("http://www.google.com.br", "ec1f31c7")]
+        [TestCase("http://www.google.com", "d9c085ad")]
+        [TestCase("http://www.github.com", "7a3d78e5")]
+        [TestCase("http://www.facebook.com", "ed28cf7e")]
+        public void Shorten_DadoAddressDeveRetornarShortened(string address, string shortened)
         {
-            _url.Shorten();
-
-            _shortenerMock.Verify(m => m.Shorten(It.IsAny<string>()), Times.Once);
-        }
-
-        [Test]
-        public void Shorten_DevePreencherPropriedadeShortened()
-        {
-            _shortenerMock
-                .Setup(m => m.Shorten(It.IsAny<string>()))
-                .Returns("123");
+            _url.Address = address;
 
             _url.Shorten();
 
-            _url.Shortened.Should().Be("123");
+            _url.Shortened.Should().Be(shortened);
         }
     }
 }

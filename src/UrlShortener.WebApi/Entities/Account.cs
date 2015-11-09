@@ -6,9 +6,9 @@ namespace UrlShortener.WebApi.Entities
     {
         private readonly IHashAlgorithm _hashAlgorithm;
 
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Email { get; set; }
+        public virtual string Password { get; set; }
 
         internal Account(IHashAlgorithm hashAlgorithm)
         {
@@ -21,12 +21,12 @@ namespace UrlShortener.WebApi.Entities
 
         }
 
-        public void HashPassword()
+        public virtual void HashPassword()
         {
             Password = _hashAlgorithm.Hash(Password);
         }
 
-        public bool ValidatePassword(string password)
+        public virtual bool ValidatePassword(string password)
         {
             password = _hashAlgorithm.Hash(password);
 

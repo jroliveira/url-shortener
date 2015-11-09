@@ -1,26 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Simple.Data;
+using UrlShortener.WebApi.Infrastructure.Data.Filter;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
-using UrlShortener.WebApi.Infrastructure.Filter.Data;
 using Model = UrlShortener.WebApi.Models.Url;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
 {
     public class GetAll
     {
-        private readonly ISkip _skip;
-        private readonly ILimit _limit;
-        private readonly IOrder<ObjectReference> _order;
+        private readonly ISkip<Filter.Simple.Data.Filter> _skip;
+        private readonly ILimit<Filter.Simple.Data.Filter> _limit;
+        private readonly IOrder<Filter.Simple.Data.Filter, ObjectReference> _order;
 
-        public GetAll(ISkip skip, ILimit limit, IOrder<ObjectReference> order)
+        public GetAll(ISkip<Filter.Simple.Data.Filter> skip,
+                      ILimit<Filter.Simple.Data.Filter> limit,
+                      IOrder<Filter.Simple.Data.Filter, ObjectReference> order)
         {
             _skip = skip;
             _limit = limit;
             _order = order;
         }
 
-        public virtual IEnumerable<Model.Get.Url> GetResult(Filter.Filter filter)
+        public virtual IEnumerable<Model.Get.Url> GetResult(Filter.Simple.Data.Filter filter)
         {
             filter.Resource = "Urls";
 

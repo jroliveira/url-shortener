@@ -1,7 +1,5 @@
 ﻿using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
-using UrlShortener.WebApi.Lib;
-using Model = UrlShortener.WebApi.Models.Account.Put;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Account
 {
