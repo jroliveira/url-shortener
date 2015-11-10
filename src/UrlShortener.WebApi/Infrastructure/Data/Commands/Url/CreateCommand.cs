@@ -10,6 +10,11 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Url
     {
         private readonly UrlValidator _validator;
 
+        protected CreateCommand()
+        {
+
+        }
+
         public CreateCommand(UrlValidator validator)
         {
             _validator = validator;

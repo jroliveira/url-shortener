@@ -10,6 +10,11 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Account
     {
         private readonly AccountValidator _validator;
 
+        protected CreateCommand()
+        {
+
+        }
+
         public CreateCommand(AccountValidator validator)
         {
             _validator = validator;

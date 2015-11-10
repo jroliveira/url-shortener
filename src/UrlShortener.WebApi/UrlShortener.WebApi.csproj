@@ -99,7 +99,6 @@
       <HintPath>..\..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="docs\definitions\account\post.yaml" />
@@ -142,11 +141,9 @@
     <Compile Include="Infrastructure\Clock.cs" />
     <Compile Include="Infrastructure\Data\Commands\Account\CreateCommand.cs" />
     <Compile Include="Infrastructure\Data\Commands\Account\ExcludeCommand.cs" />
-    <Compile Include="Infrastructure\Data\Commands\Account\RecoverCommand.cs" />
     <Compile Include="Infrastructure\Data\Commands\Account\UpdateCommand.cs" />
     <Compile Include="Infrastructure\Data\Commands\Url\CreateCommand.cs" />
     <Compile Include="Infrastructure\Data\Commands\Url\ExcludeCommand.cs" />
-    <Compile Include="Infrastructure\Data\Commands\Url\RecoverCommand.cs" />
     <Compile Include="Infrastructure\Data\Filter\Simple.Data\Filter.cs" />
     <Compile Include="Infrastructure\Data\Queries\Account\GetAll.cs" />
     <Compile Include="Infrastructure\Data\Queries\Account\GetById.cs" />

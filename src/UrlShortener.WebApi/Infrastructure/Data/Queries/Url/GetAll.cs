@@ -13,6 +13,11 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
         private readonly ILimit<Filter.Simple.Data.Filter> _limit;
         private readonly IOrder<Filter.Simple.Data.Filter, ObjectReference> _order;
 
+        protected GetAll()
+        {
+
+        }
+
         public GetAll(ISkip<Filter.Simple.Data.Filter> skip,
                       ILimit<Filter.Simple.Data.Filter> limit,
                       IOrder<Filter.Simple.Data.Filter, ObjectReference> order)

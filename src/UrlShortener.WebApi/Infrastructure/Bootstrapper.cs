@@ -57,10 +57,8 @@ namespace UrlShortener.WebApi.Infrastructure
             existingContainer.Register<Commands.Account.CreateCommand>();
             existingContainer.Register<Commands.Account.UpdateCommand>();
             existingContainer.Register<Commands.Account.ExcludeCommand>();
-            existingContainer.Register<Commands.Account.RecoverCommand>();
             existingContainer.Register<Commands.Url.CreateCommand>();
             existingContainer.Register<Commands.Url.ExcludeCommand>();
-            existingContainer.Register<Commands.Url.RecoverCommand>();
 
             /* Queries */
             existingContainer.Register<Queries.Account.GetById>();

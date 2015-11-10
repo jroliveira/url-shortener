@@ -2,7 +2,6 @@
 using System.Linq;
 using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Data.Filter;
-using UrlShortener.WebApi.Infrastructure.Exceptions;
 using Model = UrlShortener.WebApi.Models.Account.Get;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
@@ -14,6 +13,11 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Account
         private readonly IWhere<Filter.Simple.Data.Filter, SimpleExpression> _where;
         private readonly IOrder<Filter.Simple.Data.Filter, ObjectReference> _order;
         private readonly IOrderDirection<Filter.Simple.Data.Filter, OrderByDirection> _orderDirection;
+
+        protected GetAll()
+        {
+
+        }
 
         public GetAll(ISkip<Filter.Simple.Data.Filter> skip,
                       ILimit<Filter.Simple.Data.Filter> limit,

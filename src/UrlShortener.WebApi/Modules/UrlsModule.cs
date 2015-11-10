@@ -12,26 +12,22 @@ namespace UrlShortener.WebApi.Modules
         private readonly GetByShortened _getByShortened;
         private readonly CreateCommand _create;
         private readonly ExcludeCommand _exclude;
-        private readonly RecoverCommand _recover;
 
         public UrlsModule(GetAll getAll,
                           GetByShortened getByShortened,
                           CreateCommand create,
-                          ExcludeCommand exclude,
-                          RecoverCommand recover)
+                          ExcludeCommand exclude)
             : base("urls")
         {
             _getAll = getAll;
             _getByShortened = getByShortened;
             _create = create;
             _exclude = exclude;
-            _recover = recover;
 
             Get["/"] = _ => HandleError(() => All());
             Get["/{shortened}"] = parameters => HandleError(() => ByShortened(parameters.shortened));
             Post["/"] = _ => HandleError(() => Create(this.Bind<Model.Post.Url>()));
             Delete["/{id}"] = parameters => HandleError(() => Exclude(parameters.id));
-            Post["/{id}"] = parameters => HandleError(() => Recover(parameters.id));
         }
 
         private Response All()
@@ -61,13 +57,6 @@ namespace UrlShortener.WebApi.Modules
             };
 
             return Response.AsJson(response, HttpStatusCode.Created);
-        }
-
-        private Response Recover(int id)
-        {
-            _recover.Execute(id);
-
-            return Response.AsJson(id, HttpStatusCode.Created);
         }
 
         private Response Exclude(int id)

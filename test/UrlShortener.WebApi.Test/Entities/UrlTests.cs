@@ -1,8 +1,6 @@
 ﻿using FluentAssertions;
-using Moq;
 using NUnit.Framework;
 using UrlShortener.WebApi.Entities;
-using UrlShortener.WebApi.Infrastructure;
 
 namespace UrlShortener.WebApi.Test.Entities
 {

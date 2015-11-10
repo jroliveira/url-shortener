@@ -9,7 +9,7 @@ namespace UrlShortener.WebApi.Infrastructure.Extensions
         {
             var model = new
             {
-                erros = new[] { exception.Message }
+                errors = new[] { exception.Message }
             };
 
             return response.AsJson(model, statusCode);
