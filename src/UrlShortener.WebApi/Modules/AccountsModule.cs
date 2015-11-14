@@ -30,18 +30,16 @@ namespace UrlShortener.WebApi.Modules
             _update = update;
             _exclude = exclude;
 
-            Get["/"] = _ => HandleError(() => All());
-            Get["/{id}"] = parameters => HandleError(() => ById(parameters.id));
-            Post["/"] = _ => HandleError(() => Create(this.Bind<Account>()));
-            Put["/{id}"] = parameters => HandleError(() => Update(parameters.id, JsonConvert.DeserializeObject(Request.Body.AsString())));
-            Delete["/{id}"] = parameters => HandleError(() => Exclude(parameters.id));
+            Get["/"] = _ => All();
+            Get["/{id}"] = parameters => ById(parameters.id);
+            Post["/"] = _ => Create(this.Bind<Account>());
+            Put["/{id}"] = parameters => Update(parameters.id, JsonConvert.DeserializeObject(Request.Body.AsString()));
+            Delete["/{id}"] = parameters => Exclude(parameters.id);
         }
 
         private Response All()
         {
-            var filter = GetFilter();
-
-            var model = _getAll.GetResult(filter);
+            var model = _getAll.GetResult(QueryStringFilter);
 
             if (model == null)
             {

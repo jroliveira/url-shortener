@@ -31,6 +31,8 @@ namespace UrlShortener.WebApi.Infrastructure
                 .WithHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE,OPTIONS")
                 .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type, X-CSRF-Token, X-Requested-With, api_key, Authorization"));
 
+            pipelines.OnError.AddItemToEndOfPipeline(HandlerError.Config);
+
             base.RequestStartup(container, pipelines, context);
         }
 
@@ -64,7 +66,7 @@ namespace UrlShortener.WebApi.Infrastructure
             existingContainer.Register<Queries.Account.GetById>();
             existingContainer.Register<Queries.Account.GetAll>();
             existingContainer.Register<Queries.Url.GetAll>();
-            existingContainer.Register<Queries.Url.GetByShortened>();
+            existingContainer.Register<Queries.Url.GetByUrl>();
 
             /* Validators */
             existingContainer.Register<AccountValidator>();

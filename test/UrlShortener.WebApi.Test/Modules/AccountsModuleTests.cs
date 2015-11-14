@@ -1,6 +1,7 @@
 using Moq;
 using Nancy.Testing;
 using NUnit.Framework;
+using UrlShortener.WebApi.Infrastructure;
 using UrlShortener.WebApi.Infrastructure.Data.Commands.Account;
 using UrlShortener.WebApi.Infrastructure.Data.Queries.Account;
 using UrlShortener.WebApi.Modules;
@@ -29,6 +30,11 @@ namespace UrlShortener.WebApi.Test.Modules
             var configurable = new ConfigurableBootstrapper(with =>
             {
                 with.Module<AccountsModule>();
+                with.RequestStartup((container, pipelines, context) =>
+                {
+                    pipelines.OnError.AddItemToEndOfPipeline(HandlerError.Config);
+                });
+
                 with.Dependency(GetAllMock.Object);
                 with.Dependency(GetByIdMock.Object);
                 with.Dependency(CreateMock.Object);

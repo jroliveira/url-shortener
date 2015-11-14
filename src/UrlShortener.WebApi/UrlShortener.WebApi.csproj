@@ -139,6 +139,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Url.cs" />
     <Compile Include="Infrastructure\Clock.cs" />
+    <Compile Include="Infrastructure\HandlerError.cs" />
     <Compile Include="Infrastructure\Data\Commands\Account\CreateCommand.cs" />
     <Compile Include="Infrastructure\Data\Commands\Account\ExcludeCommand.cs" />
     <Compile Include="Infrastructure\Data\Commands\Account\UpdateCommand.cs" />
@@ -149,10 +150,8 @@
     <Compile Include="Infrastructure\Data\Queries\Account\GetById.cs" />
     <Compile Include="Infrastructure\Data\Queries\Url\GetAll.cs" />
     <Compile Include="Infrastructure\Data\Queries\Url\GetByShortened.cs" />
-    <Compile Include="Infrastructure\Exceptions\UrlShortenerException.cs" />
+    <Compile Include="Infrastructure\Exceptions\ValidationException.cs" />
     <Compile Include="Infrastructure\Exceptions\NotFoundException.cs" />
-    <Compile Include="Infrastructure\Extensions\ResponseExtensions.cs" />
-    <Compile Include="Infrastructure\Extensions\StringsExtensions.cs" />
     <Compile Include="Infrastructure\Data\Filter\IOrderDirection.cs" />
     <Compile Include="Infrastructure\Data\Filter\IWhere.cs" />
     <Compile Include="Infrastructure\Data\Filter\ILimit.cs" />

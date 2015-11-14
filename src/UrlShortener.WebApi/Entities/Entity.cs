@@ -14,11 +14,6 @@ namespace UrlShortener.WebApi.Entities
             CreationDate = Clock.Now();
         }
 
-        public virtual void Recover()
-        {
-            Deleted = false;
-        }
-
         public virtual void MarkAsDeleted()
         {
             Deleted = true;

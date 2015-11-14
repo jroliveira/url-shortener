@@ -1,12 +1,11 @@
 ﻿using Simple.Data;
 using UrlShortener.WebApi.Infrastructure.Exceptions;
-using Model = UrlShortener.WebApi.Models.Url;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
 {
-    public class GetByShortened
+    public class GetByUrl
     {
-        public virtual Model.Get.Url GetResult(string shortened)
+        public virtual Models.Url.Get.Url GetResult(string shortened)
         {
             var db = Database.OpenNamedConnection("db");
 
@@ -23,7 +22,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Queries.Url
                                   db.Urls.Shortened == shortened)
                               .FirstOrDefault();
 
-            var model = Slapper.AutoMapper.MapDynamic<Model.Get.Url>(data) as Model.Get.Url;
+            var model = Slapper.AutoMapper.MapDynamic<Models.Url.Get.Url>(data) as Models.Url.Get.Url;
 
             if (model == null)
             {

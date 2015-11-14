@@ -26,7 +26,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Commands.Url
 
             if (!validateResult.IsValid)
             {
-                throw new UrlShortenerException(validateResult.Errors);
+                throw new ValidationException(validateResult.Errors);
             }
 
             var entity = Mapper.Map<Entities.Url>(model);

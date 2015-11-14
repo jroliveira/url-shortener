@@ -1,25 +1,25 @@
-﻿using Nancy;
-using Nancy.Responses;
+﻿using System.IO;
+using Nancy;
 
 namespace UrlShortener.WebApi.Modules
 {
     public class DocsModule : NancyModule
     {
-        private readonly IRootPathProvider _pathProvider;
+        private readonly IRootPathProvider _rootPathProvider;
 
-        public DocsModule(IRootPathProvider pathProvider)
+        public DocsModule(IRootPathProvider rootPathProvider)
             : base("api-docs")
         {
-            _pathProvider = pathProvider;
-
+            _rootPathProvider = rootPathProvider;
             Get["/"] = _ => Index();
         }
 
         private Response Index()
         {
-            var file = _pathProvider.GetRootPath() + "docs\\swagger.json";
-
-            return new GenericFileResponse(file, "application/json");
+            var rootPath = _rootPathProvider.GetRootPath();
+            var file = Path.Combine(rootPath, "docs", "swagger.json");
+            
+            return Response.AsFile(file, "application/json");
         }
     }
 }

@@ -2,19 +2,19 @@
 using Nancy.ModelBinding;
 using UrlShortener.WebApi.Infrastructure.Data.Commands.Url;
 using UrlShortener.WebApi.Infrastructure.Data.Queries.Url;
-using Model = UrlShortener.WebApi.Models.Url;
+using Url = UrlShortener.WebApi.Models.Url.Post.Url;
 
 namespace UrlShortener.WebApi.Modules
 {
     public class UrlsModule : BaseModule
     {
         private readonly GetAll _getAll;
-        private readonly GetByShortened _getByShortened;
+        private readonly GetByUrl _getByShortened;
         private readonly CreateCommand _create;
         private readonly ExcludeCommand _exclude;
 
         public UrlsModule(GetAll getAll,
-                          GetByShortened getByShortened,
+                          GetByUrl getByShortened,
                           CreateCommand create,
                           ExcludeCommand exclude)
             : base("urls")
@@ -24,29 +24,27 @@ namespace UrlShortener.WebApi.Modules
             _create = create;
             _exclude = exclude;
 
-            Get["/"] = _ => HandleError(() => All());
-            Get["/{shortened}"] = parameters => HandleError(() => ByShortened(parameters.shortened));
-            Post["/"] = _ => HandleError(() => Create(this.Bind<Model.Post.Url>()));
-            Delete["/{id}"] = parameters => HandleError(() => Exclude(parameters.id));
+            Get["/"] = _ => All();
+            Get["/{url}"] = parameters => ByShortened(parameters.url);
+            Post["/"] = _ => Create(this.Bind<Url>());
+            Delete["/{id}"] = parameters => Exclude(parameters.id);
         }
 
         private Response All()
         {
-            var filter = GetFilter();
-
-            var model = _getAll.GetResult(filter);
+            var model = _getAll.GetResult(QueryStringFilter);
 
             return Response.AsJson(model);
         }
 
-        private Response ByShortened(string shortened)
+        private Response ByShortened(string url)
         {
-            var model = _getByShortened.GetResult(shortened);
+            var model = _getByShortened.GetResult(url);
 
             return Response.AsJson(model);
         }
 
-        private Response Create(Model.Post.Url model)
+        private Response Create(Url model)
         {
             var entity = _create.Execute(model);
 

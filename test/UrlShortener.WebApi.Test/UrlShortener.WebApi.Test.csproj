@@ -120,6 +120,7 @@
     <Compile Include="Infrastructure\Mappings\UrlProfileTests.cs" />
     <Compile Include="Infrastructure\Validators\UrlValidatorTests.cs" />
     <Compile Include="Infrastructure\Validators\AccountValidatorTests.cs" />
+    <Compile Include="Lib\Project.cs" />
     <Compile Include="Modules\AccountsModulePostTests.cs">
       <DependentUpon>AccountsModuleTests.cs</DependentUpon>
     </Compile>
