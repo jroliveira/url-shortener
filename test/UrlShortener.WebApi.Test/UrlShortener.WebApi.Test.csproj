@@ -138,11 +138,31 @@
     <Compile Include="Modules\AccountsModulePutTests.cs">
       <DependentUpon>AccountsModuleTests.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\UrlsModuleDeleteTests.cs">
+      <DependentUpon>UrlsModuleTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\UrlsModuleGetAllTests.cs">
+      <DependentUpon>UrlsModuleTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\UrlsModuleGetByUrlTests.cs">
+      <DependentUpon>UrlsModuleTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\UrlsModulePostTests.cs">
+      <DependentUpon>UrlsModuleTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\UrlsModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Modules\Request\url-post.json" />
     <None Include="Modules\Request\account-post.json" />
     <None Include="Modules\Request\account-put.json" />
+    <None Include="Modules\Response\url-post-8edd484c.json" />
+    <None Include="Modules\Response\url-get-by-url-8edd484c.json" />
+    <None Include="Modules\Response\url-get-by-url-8edd484c-not-found.json" />
+    <None Include="Modules\Response\url-get-all.json" />
+    <None Include="Modules\Response\url-get-all-not-found.json" />
+    <None Include="Modules\Response\url-delete-1-not-found.json" />
     <None Include="Modules\Response\account-post-1.json" />
     <None Include="Modules\Response\account-delete-1-not-found.json" />
     <None Include="Modules\Response\account-put-1-not-found.json" />

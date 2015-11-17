@@ -2,6 +2,7 @@
 using Nancy.ModelBinding;
 using UrlShortener.WebApi.Infrastructure.Data.Commands.Url;
 using UrlShortener.WebApi.Infrastructure.Data.Queries.Url;
+using UrlShortener.WebApi.Infrastructure.Exceptions;
 using Url = UrlShortener.WebApi.Models.Url.Post.Url;
 
 namespace UrlShortener.WebApi.Modules
@@ -25,7 +26,7 @@ namespace UrlShortener.WebApi.Modules
             _exclude = exclude;
 
             Get["/"] = _ => All();
-            Get["/{url}"] = parameters => ByShortened(parameters.url);
+            Get["/{url}"] = parameters => ByUrl(parameters.url);
             Post["/"] = _ => Create(this.Bind<Url>());
             Delete["/{id}"] = parameters => Exclude(parameters.id);
         }
@@ -34,12 +35,22 @@ namespace UrlShortener.WebApi.Modules
         {
             var model = _getAll.GetResult(QueryStringFilter);
 
+            if (model == null)
+            {
+                throw new NotFoundException("Resource 'urls' with filter passed could not be found");
+            }
+
             return Response.AsJson(model);
         }
 
-        private Response ByShortened(string url)
+        private Response ByUrl(string url)
         {
             var model = _getByShortened.GetResult(url);
+
+            if (model == null)
+            {
+                throw new NotFoundException("Resource 'urls' with url {0} could not be found", url);
+            }
 
             return Response.AsJson(model);
         }
