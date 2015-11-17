@@ -1,0 +1,21 @@
+tags: 
+  - "url"
+summary: "Add a new url to the store"
+operationId: "addUrl"
+consumes: 
+  - "application/json"
+produces: 
+  - "application/json"
+parameters: 
+  - 
+    in: "body"
+    name: "body"
+    description: "Url object that needs to be added to the store"
+    required: true
+    schema: 
+      $ref: ./../../definitions/url/post.yaml
+responses: 
+  201: 
+    description: "Created an url"
+  422: 
+    description: "Invalid input"

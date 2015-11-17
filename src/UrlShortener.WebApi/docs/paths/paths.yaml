@@ -11,3 +11,15 @@
     $ref: ./account/put.yaml
   delete: 
     $ref: ./account/delete.yaml
+
+/urls: 
+  post: 
+    $ref: ./url/post.yaml
+  get: 
+    $ref: ./url/get-all.yaml
+
+/urls/{id}: 
+  get: 
+    $ref: ./url/get-by-id.yaml
+  delete: 
+    $ref: ./url/delete.yaml

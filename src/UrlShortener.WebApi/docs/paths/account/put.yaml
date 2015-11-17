@@ -23,7 +23,7 @@ parameters:
       $ref: ./../../definitions/account/put.yaml
 responses: 
   204: 
-    description: "Updated a account"
+    description: "Updated an account"
   404: 
     description: "Account not found"
   422: 

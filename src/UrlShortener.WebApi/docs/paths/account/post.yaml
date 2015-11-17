@@ -16,6 +16,6 @@ parameters:
       $ref: ./../../definitions/account/post.yaml
 responses: 
   201: 
-    description: "Created a account"
+    description: "Created an account"
   422: 
     description: "Invalid input"

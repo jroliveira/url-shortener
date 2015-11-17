@@ -13,6 +13,10 @@
     {
       "name": "account",
       "description": "Everything about your Accounts"
+    },
+    {
+      "name": "url",
+      "description": "Everything about your Urls"
     }
   ],
   "schemes": [
@@ -62,7 +66,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created a account"
+            "description": "Created an account"
           },
           "422": {
             "description": "Invalid input"
@@ -199,7 +203,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Updated a account"
+            "description": "Updated an account"
           },
           "404": {
             "description": "Account not found"
@@ -213,7 +217,7 @@
         "tags": [
           "account"
         ],
-        "summary": "Deletes a account",
+        "summary": "Deletes an account",
         "operationId": "deleteAccount",
         "produces": [
           "application/json"
@@ -230,10 +234,187 @@
         ],
         "responses": {
           "204": {
-            "description": "Updated a account"
+            "description": "Deleted an account"
           },
           "404": {
             "description": "Account not found"
+          }
+        }
+      }
+    },
+    "/urls": {
+      "post": {
+        "tags": [
+          "url"
+        ],
+        "summary": "Add a new url to the store",
+        "operationId": "addUrl",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Url object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "account": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "UrlPost"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created an url"
+          },
+          "422": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "url"
+        ],
+        "summary": "Finds Urls",
+        "description": "Returns all urls",
+        "operationId": "getUrls",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "account": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int32"
+                      }
+                    }
+                  }
+                },
+                "xml": {
+                  "name": "UrlGet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/urls/{id}": {
+      "get": {
+        "tags": [
+          "url"
+        ],
+        "summary": "Find url by ID",
+        "description": "Returns a single url",
+        "operationId": "getUrlById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of url to return",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "account": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "UrlGet"
+              }
+            }
+          },
+          "404": {
+            "description": "Url not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "url"
+        ],
+        "summary": "Deletes an url",
+        "operationId": "deleteUrl",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of url to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted an url"
+          },
+          "404": {
+            "description": "Url not found"
           }
         }
       }

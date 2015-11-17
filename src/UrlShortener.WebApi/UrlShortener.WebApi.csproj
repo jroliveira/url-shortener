@@ -210,6 +210,13 @@
     <Content Include="docs\swagger.json" />
     <Content Include="docs\tags\account.yaml" />
     <Content Include="packages.config" />
+    <Content Include="docs\definitions\url\get.yaml" />
+    <Content Include="docs\definitions\url\post.yaml" />
+    <Content Include="docs\paths\url\delete.yaml" />
+    <Content Include="docs\paths\url\get-all.yaml" />
+    <Content Include="docs\paths\url\get-by-id.yaml" />
+    <Content Include="docs\paths\url\post.yaml" />
+    <Content Include="docs\tags\url.yaml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

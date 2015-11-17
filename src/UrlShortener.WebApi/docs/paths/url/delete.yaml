@@ -1,0 +1,19 @@
+tags: 
+  - "url"
+summary: "Deletes an url"
+operationId: "deleteUrl"
+produces: 
+  - "application/json"
+parameters: 
+  - 
+    name: "id"
+    in: "path"
+    description: "ID of url to delete"
+    required: true
+    type: "integer"
+    format: "int32"
+responses: 
+  204: 
+    description: "Deleted an url"
+  404: 
+    description: "Url not found"

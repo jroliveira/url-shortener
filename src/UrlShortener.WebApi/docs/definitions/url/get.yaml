@@ -1,0 +1,15 @@
+type: "object"
+properties: 
+  id: 
+    type: "integer"
+    format: "int32"
+  address: 
+    type: "string"
+  account: 
+    type: "object"
+    properties: 
+      id: 
+        type: "integer"
+        format: "int32"
+xml: 
+  name: "UrlGet"

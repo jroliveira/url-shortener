@@ -1,6 +1,6 @@
 tags: 
   - "account"
-summary: "Deletes a account"
+summary: "Deletes an account"
 operationId: "deleteAccount"
 produces: 
   - "application/json"
@@ -14,6 +14,6 @@ parameters:
     format: "int32"
 responses: 
   204: 
-    description: "Updated a account"
+    description: "Deleted an account"
   404: 
     description: "Account not found"

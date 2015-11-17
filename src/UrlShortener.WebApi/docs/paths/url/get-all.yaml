@@ -1,0 +1,14 @@
+tags: 
+  - "url"
+summary: "Finds Urls"
+description: "Returns all urls"
+operationId: "getUrls"
+produces: 
+  - "application/json"
+responses: 
+  200: 
+    description: "successful operation"
+    schema: 
+      type: "array"
+      items: 
+        $ref: ./../../definitions/url/get.yaml
