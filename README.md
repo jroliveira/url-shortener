@@ -6,77 +6,47 @@
 ## O que é?
 
 É um encurtador de url feito em C#.  
-A aplicação roda em Mono e .NET Framework.  
+A aplicação roda em Mono e .NET Framework. 
 
-Para desenvolvimento da aplicação foram utilizadas principalmente as bibliotecas.
+## Tecnologias utilizadas 
+
+Abaixo os principais pacotes/tecnologias utilizados em cada projeto.
+
+### WebApi
 
  - Simple.Data
  - FluentMigrator
  - Nancy
 
-Para os testes unitários foram usadas as bibliotecas.
+### WebApi.Test
 
  - NUnit
  - Moq
  - Fluent Assertions 
+ - Nancy.Testing
 
-Para gerar a documentação da Swagger foi utilizado Nodejs com as bibliotecas.
+### Swagger docs
 
+ - Nodejs
  - json-refs
  - yaml-js
 
-## Partes da aplicação
-
-### UrlShortener.WebApi
-
-É o core do sistema e também é interface REST em Nancy como mencionado acima.  
-
-#### Filtro
-
-A interface REST possui um sistema de filtro baseado no projeto [StrongLoop Node.js API Platform][strongloop] desenvolvido pela [Atlassian Confluence][atlassian].
-
-[**Limit**][limit]
-
-``` js
-/urls?filter[limit]=5
-```
-
-[**Skip**][skip]
-
-``` js
-/urls?filter[skip]=50
-```
-
-[**Order**][order]
-
-``` js
-/urls?filter[order]=address%desc
-
-/urls?filter[order]=address%20asc
-```
-
-[**Where**][where]
-
-``` js
-/urls?filter[where][id][gt]=100
-
-/urls?filter[where][id][lt]=100
-```
-
-### Rodar a aplicação
-
-#### Rodar a API
+## Rodar a aplicação
 
 * `git clone https://github.com/jroliveira/url-shortener.git`
 * `bundler`
 
-#### Gerar a documentação do Swagger
+## Gerar a documentação do Swagger
 
-* cd docs
-* npm install
-* npm start
+* `cd src/docs/UrlShortener.WebApi/docs`
+* `npm install`
+* `npm start`
 
-### Contributions 
+## Rodar os testes
+
+* `rake test`
+
+## Contributions 
 
 1. Fork it
 2. git checkout -b <branch-name>
