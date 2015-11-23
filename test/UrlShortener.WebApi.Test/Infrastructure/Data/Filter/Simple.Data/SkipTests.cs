@@ -3,7 +3,7 @@ using Moq;
 using NUnit.Framework;
 using UrlShortener.WebApi.Infrastructure.Data.Filter.Simple.Data;
 
-namespace UrlShortener.WebApi.Test.Infrastructure.Filter.Data.Simple.Data
+namespace UrlShortener.WebApi.Test.Infrastructure.Data.Filter.Simple.Data
 {
     [TestFixture]
     public class SkipTests

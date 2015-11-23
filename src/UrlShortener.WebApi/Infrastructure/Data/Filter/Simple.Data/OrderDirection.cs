@@ -1,4 +1,5 @@
-﻿using Restful.Query.Filter.Order;
+﻿using System.Linq;
+using Restful.Query.Filter.Order;
 using Simple.Data;
 
 namespace UrlShortener.WebApi.Infrastructure.Data.Filter.Simple.Data
@@ -7,7 +8,7 @@ namespace UrlShortener.WebApi.Infrastructure.Data.Filter.Simple.Data
     {
         public OrderByDirection Apply(Filter filter)
         {
-            if (filter.Order.Sorts == Sorts.Desc)
+            if (filter.Order.Fields.First().Sorts == Sorts.Desc)
             {
                 return OrderByDirection.Descending;
             }
