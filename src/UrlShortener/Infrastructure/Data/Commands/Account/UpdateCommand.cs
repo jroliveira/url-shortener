@@ -7,11 +7,6 @@ namespace UrlShortener.Infrastructure.Data.Commands.Account
     {
         private readonly PartialUpdater _partialUpdater;
 
-        protected UpdateCommand()
-        {
-
-        }
-
         public UpdateCommand(PartialUpdater partialUpdater)
         {
             _partialUpdater = partialUpdater;
@@ -19,7 +14,7 @@ namespace UrlShortener.Infrastructure.Data.Commands.Account
 
         public virtual void Execute(int id, dynamic changedModel)
         {
-            var db = Database.OpenNamedConnection("db");
+            var db = Database.Open();
 
             Entities.Account entity = db.Accounts.Get(id);
 

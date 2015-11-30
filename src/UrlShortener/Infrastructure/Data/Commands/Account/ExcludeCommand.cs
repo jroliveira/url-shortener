@@ -7,13 +7,13 @@ namespace UrlShortener.Infrastructure.Data.Commands.Account
     {
         public virtual void Execute(int id)
         {
-            var db = Database.OpenNamedConnection("db");
+            var db = Database.Open();
 
             Entities.Account entity = db.Accounts.Get(id);
 
             if (entity == null || entity.Deleted)
             {
-                throw new NotFoundException("Account {0} not found");
+                throw new NotFoundException("Account {0} not found", id);
             }
 
             entity.MarkAsDeleted();

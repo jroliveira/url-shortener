@@ -30,7 +30,7 @@ namespace UrlShortener.Infrastructure.Data.Queries.Url
         {
             filter.Resource = "Urls";
 
-            DataStrategy strategy = Database.OpenNamedConnection("db");
+            DataStrategy strategy = Database.Open();
 
             var query = new SimpleQuery(strategy, filter.Resource);
 

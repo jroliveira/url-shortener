@@ -6,7 +6,7 @@ namespace UrlShortener.Infrastructure.Data.Queries.Account
     {
         public virtual Entities.Account GetResult(int id)
         {
-            var db = Database.OpenNamedConnection("db");
+            var db = Database.Open();
 
             Entities.Account model = db.Accounts.All()
                                                 .Select(

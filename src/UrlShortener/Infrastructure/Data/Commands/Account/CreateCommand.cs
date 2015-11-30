@@ -8,7 +8,7 @@ namespace UrlShortener.Infrastructure.Data.Commands.Account
         {
             entity.HashPassword();
 
-            var db = Database.OpenNamedConnection("db");
+            var db = Database.Open();
 
             var inserted = db.Accounts.Insert(entity);
 

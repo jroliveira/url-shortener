@@ -7,7 +7,7 @@ namespace UrlShortener.Infrastructure.Data.Queries.Url
     {
         public virtual Entities.Url GetResult(string shortened)
         {
-            var db = Database.OpenNamedConnection("db");
+            var db = Database.Open();
 
             dynamic accounts;
 

@@ -7,7 +7,7 @@ namespace UrlShortener.Infrastructure.Data.Commands.Url
     {
         public virtual void Execute(int id)
         {
-            var db = Database.OpenNamedConnection("db");
+            var db = Database.Open();
 
             Entities.Url entity = db.Urls.Get(id);
 

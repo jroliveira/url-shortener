@@ -8,7 +8,7 @@ namespace UrlShortener.Infrastructure.Data.Commands.Url
         {
             entity.Shorten();
 
-            var db = Database.OpenNamedConnection("db");
+            var db = Database.Open();
 
             var data = new
             {

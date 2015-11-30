@@ -37,7 +37,7 @@ namespace UrlShortener.WebApi.Modules
 
             var user = new UserIdentity
             {
-                UserName = entity.Name,
+                UserName = entity.Email,
                 Claims = new[] { "admin" }
             };
 
@@ -45,7 +45,7 @@ namespace UrlShortener.WebApi.Modules
 
             var response = new
             {
-                accessToken = token
+                accessToken = "Token" + token
             };
 
             return Response.AsJson(response);
