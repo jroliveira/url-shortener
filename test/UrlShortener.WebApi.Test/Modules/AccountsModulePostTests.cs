@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using FluentAssertions;
+using FluentValidation.Results;
 using Moq;
 using Nancy;
 using Nancy.Testing;
 using NUnit.Framework;
-using UrlShortener.WebApi.Models.Account.Post;
+using UrlShortener.Entities;
 using UrlShortener.WebApi.Test.Lib;
 
 namespace UrlShortener.WebApi.Test.Modules
@@ -17,6 +19,10 @@ namespace UrlShortener.WebApi.Test.Modules
             CreateMock
                 .Setup(c => c.Execute(It.IsAny<Account>()))
                 .Returns(1);
+
+            AccountValidatorMock
+                .Setup(v => v.Validate(It.IsAny<Models.Account.Post.Account>()))
+                .Returns(new ValidationResult());
         }
 
         [Test]
@@ -56,6 +62,46 @@ namespace UrlShortener.WebApi.Test.Modules
             var actual = "account-post-1.json".Load("response");
 
             response.Body.AsString().Should().Be(actual);
+        }
+
+        [Test]
+        public void Post_WhenValidationExceptionIsThrown_ShouldReturnErrorJsonAsExpected()
+        {
+            AccountValidatorMock
+                .Setup(c => c.Validate(It.IsAny<Models.Account.Post.Account>()))
+                .Returns(new ValidationResult(new List<ValidationFailure>
+                {
+                    new ValidationFailure("Name", "Nome deve ser informado.")
+                }));
+
+            var response = Browser.Post("/accounts", with =>
+            {
+                with.HttpRequest();
+                with.Body("account-post.json".Load("request"));
+            });
+
+            var actual = "account-post-conflict.json".Load("response");
+
+            response.Body.AsString().Should().Be(actual);
+        }
+
+        [Test]
+        public void Post_WhenValidationExceptionIsThrown_HttpStatusCodeShouldBe409Conflict()
+        {
+            AccountValidatorMock
+                .Setup(c => c.Validate(It.IsAny<Models.Account.Post.Account>()))
+                .Returns(new ValidationResult(new List<ValidationFailure>
+                {
+                    new ValidationFailure("Name", "Nome deve ser informado.")
+                }));
+
+            var response = Browser.Post("/accounts", with =>
+            {
+                with.HttpRequest();
+                with.Body("account-post.json".Load("request"));
+            });
+
+            response.StatusCode.Should().Be(HttpStatusCode.Conflict);
         }
 
         [Test]

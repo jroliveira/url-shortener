@@ -27,6 +27,61 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E4A0D130
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.WebApi.Test", "test\UrlShortener.WebApi.Test\UrlShortener.WebApi.Test.csproj", "{17ED0A53-B02E-4025-9DC5-511F3A0166B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener", "src\UrlShortener\UrlShortener.csproj", "{0776B7EF-8CBC-405F-BA61-AE24E9E510E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrlShortener.Test", "test\UrlShortener.Test\UrlShortener.Test.csproj", "{9647F34D-34E8-449C-9B15-4C5CB9811CC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B4B057AD-CF8C-4914-9CF0-CE37F4B4F831}"
+	ProjectSection(SolutionItems) = preProject
+		src\Swagger\info.yaml = src\Swagger\info.yaml
+		src\Swagger\package.json = src\Swagger\package.json
+		src\Swagger\resolve.js = src\Swagger\resolve.js
+		src\Swagger\swagger.yaml = src\Swagger\swagger.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "definitions", "definitions", "{8A1AF085-304A-4947-9382-49C040C92B34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "paths", "paths", "{11678E4E-B28E-4F8E-993B-DBCF3F955D02}"
+	ProjectSection(SolutionItems) = preProject
+		src\Swagger\paths\paths.yaml = src\Swagger\paths\paths.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tags", "tags", "{3E2D55CA-AA17-496D-9DCB-C26339ADF68B}"
+	ProjectSection(SolutionItems) = preProject
+		src\Swagger\tags\account.yaml = src\Swagger\tags\account.yaml
+		src\Swagger\tags\url.yaml = src\Swagger\tags\url.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "account", "account", "{7F971C78-9EAE-4EA0-A180-AB6EAF5CD475}"
+	ProjectSection(SolutionItems) = preProject
+		src\Swagger\paths\account\delete.yaml = src\Swagger\paths\account\delete.yaml
+		src\Swagger\paths\account\get-all.yaml = src\Swagger\paths\account\get-all.yaml
+		src\Swagger\paths\account\get-by-id.yaml = src\Swagger\paths\account\get-by-id.yaml
+		src\Swagger\paths\account\post.yaml = src\Swagger\paths\account\post.yaml
+		src\Swagger\paths\account\put.yaml = src\Swagger\paths\account\put.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "url", "url", "{FD9915B9-5D0C-465D-BA61-044085DE2247}"
+	ProjectSection(SolutionItems) = preProject
+		src\Swagger\paths\url\delete.yaml = src\Swagger\paths\url\delete.yaml
+		src\Swagger\paths\url\get-all.yaml = src\Swagger\paths\url\get-all.yaml
+		src\Swagger\paths\url\get-by-id.yaml = src\Swagger\paths\url\get-by-id.yaml
+		src\Swagger\paths\url\post.yaml = src\Swagger\paths\url\post.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "account", "account", "{D7AD9782-9F29-41E5-99C3-148D12F4B4B7}"
+	ProjectSection(SolutionItems) = preProject
+		src\Swagger\definitions\account\get.yaml = src\Swagger\definitions\account\get.yaml
+		src\Swagger\definitions\account\post.yaml = src\Swagger\definitions\account\post.yaml
+		src\Swagger\definitions\account\put.yaml = src\Swagger\definitions\account\put.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "url", "url", "{B2DA8D2E-0E40-4A69-AD63-8BD109B892B1}"
+	ProjectSection(SolutionItems) = preProject
+		src\Swagger\definitions\url\get.yaml = src\Swagger\definitions\url\get.yaml
+		src\Swagger\definitions\url\post.yaml = src\Swagger\definitions\url\post.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,11 +96,27 @@ Global
 		{17ED0A53-B02E-4025-9DC5-511F3A0166B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17ED0A53-B02E-4025-9DC5-511F3A0166B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17ED0A53-B02E-4025-9DC5-511F3A0166B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0776B7EF-8CBC-405F-BA61-AE24E9E510E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0776B7EF-8CBC-405F-BA61-AE24E9E510E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0776B7EF-8CBC-405F-BA61-AE24E9E510E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0776B7EF-8CBC-405F-BA61-AE24E9E510E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9647F34D-34E8-449C-9B15-4C5CB9811CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9647F34D-34E8-449C-9B15-4C5CB9811CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9647F34D-34E8-449C-9B15-4C5CB9811CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9647F34D-34E8-449C-9B15-4C5CB9811CC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{17ED0A53-B02E-4025-9DC5-511F3A0166B2} = {E4A0D130-907D-4120-8390-E326B6EA2CD8}
+		{9647F34D-34E8-449C-9B15-4C5CB9811CC1} = {E4A0D130-907D-4120-8390-E326B6EA2CD8}
+		{8A1AF085-304A-4947-9382-49C040C92B34} = {B4B057AD-CF8C-4914-9CF0-CE37F4B4F831}
+		{11678E4E-B28E-4F8E-993B-DBCF3F955D02} = {B4B057AD-CF8C-4914-9CF0-CE37F4B4F831}
+		{3E2D55CA-AA17-496D-9DCB-C26339ADF68B} = {B4B057AD-CF8C-4914-9CF0-CE37F4B4F831}
+		{7F971C78-9EAE-4EA0-A180-AB6EAF5CD475} = {11678E4E-B28E-4F8E-993B-DBCF3F955D02}
+		{FD9915B9-5D0C-465D-BA61-044085DE2247} = {11678E4E-B28E-4F8E-993B-DBCF3F955D02}
+		{D7AD9782-9F29-41E5-99C3-148D12F4B4B7} = {8A1AF085-304A-4947-9382-49C040C92B34}
+		{B2DA8D2E-0E40-4A69-AD63-8BD109B892B1} = {8A1AF085-304A-4947-9382-49C040C92B34}
 	EndGlobalSection
 EndGlobal

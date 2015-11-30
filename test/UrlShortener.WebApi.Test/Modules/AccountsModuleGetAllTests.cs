@@ -5,8 +5,8 @@ using Moq;
 using Nancy;
 using Nancy.Testing;
 using NUnit.Framework;
-using UrlShortener.WebApi.Infrastructure.Data.Filter.Simple.Data;
-using UrlShortener.WebApi.Models.Account.Get;
+using UrlShortener.Entities;
+using UrlShortener.Infrastructure.Data.Filter.Simple.Data;
 using UrlShortener.WebApi.Test.Lib;
 
 namespace UrlShortener.WebApi.Test.Modules

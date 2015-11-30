@@ -1,9 +1,11 @@
 using Moq;
 using Nancy.Testing;
 using NUnit.Framework;
-using UrlShortener.WebApi.Infrastructure;
-using UrlShortener.WebApi.Infrastructure.Data.Commands.Account;
-using UrlShortener.WebApi.Infrastructure.Data.Queries.Account;
+using UrlShortener.Infrastructure.Data.Commands.Account;
+using UrlShortener.Infrastructure.Data.Queries.Account;
+using UrlShortener.WebApi.Lib;
+using UrlShortener.WebApi.Lib.Authentication;
+using UrlShortener.WebApi.Lib.Validators;
 using UrlShortener.WebApi.Modules;
 
 namespace UrlShortener.WebApi.Test.Modules
@@ -15,6 +17,7 @@ namespace UrlShortener.WebApi.Test.Modules
         protected Mock<CreateCommand> CreateMock;
         protected Mock<UpdateCommand> UpdateMock;
         protected Mock<ExcludeCommand> ExcludeMock;
+        protected Mock<AccountValidator> AccountValidatorMock;
 
         protected Browser Browser;
 
@@ -26,13 +29,25 @@ namespace UrlShortener.WebApi.Test.Modules
             CreateMock = new Mock<CreateCommand>();
             UpdateMock = new Mock<UpdateCommand>();
             ExcludeMock = new Mock<ExcludeCommand>();
+            AccountValidatorMock = new Mock<AccountValidator>();
 
             var configurable = new ConfigurableBootstrapper(with =>
             {
                 with.Module<AccountsModule>();
+
+                with.ApplicationStartup((container, pipelines) =>
+                {
+                    AutoMapperConfig.RegisterProfiles();
+                });
+
                 with.RequestStartup((container, pipelines, context) =>
                 {
                     pipelines.OnError.AddItemToEndOfPipeline(HandlerError.Config);
+                    context.CurrentUser = new UserIdentity
+                    {
+                        Claims = new[] { "admin" },
+                        UserName = "admin"
+                    };
                 });
 
                 with.Dependency(GetAllMock.Object);
@@ -40,6 +55,7 @@ namespace UrlShortener.WebApi.Test.Modules
                 with.Dependency(CreateMock.Object);
                 with.Dependency(UpdateMock.Object);
                 with.Dependency(ExcludeMock.Object);
+                with.Dependency(AccountValidatorMock.Object);
             });
 
             Browser = new Browser(configurable);

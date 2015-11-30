@@ -53,10 +53,3 @@ Abaixo os principais pacotes/tecnologias utilizados em cada projeto.
 3. git add --all && git commit -m "feature description"
 4. git push origin <branch-name>
 5. Create a pull request
-
-[strongloop]: https://docs.strongloop.com/display/SL/Installing+StrongLoop
-[atlassian]: https://www.atlassian.com/software/confluence
-[limit]: https://docs.strongloop.com/display/public/LB/Limit+filter
-[skip]: https://docs.strongloop.com/display/public/LB/Skip+filter
-[order]: https://docs.strongloop.com/display/public/LB/Order+filter
-[where]: https://docs.strongloop.com/display/public/LB/Where+filter

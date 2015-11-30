@@ -1,5 +1,5 @@
 ﻿using Nancy;
-using UrlShortener.WebApi.Infrastructure.Data.Filter.Simple.Data;
+using UrlShortener.Infrastructure.Data.Filter.Simple.Data;
 
 namespace UrlShortener.WebApi.Modules
 {
@@ -10,7 +10,7 @@ namespace UrlShortener.WebApi.Modules
         protected BaseModule(string modulePath)
             : base(modulePath)
         {
-
+            Options["/"] = _ => HttpStatusCode.OK;
         }
     }
 }

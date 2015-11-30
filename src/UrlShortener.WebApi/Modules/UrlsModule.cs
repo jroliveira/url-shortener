@@ -1,9 +1,12 @@
-﻿using Nancy;
+﻿using System.Collections.Generic;
+using AutoMapper;
+using Nancy;
 using Nancy.ModelBinding;
-using UrlShortener.WebApi.Infrastructure.Data.Commands.Url;
-using UrlShortener.WebApi.Infrastructure.Data.Queries.Url;
-using UrlShortener.WebApi.Infrastructure.Exceptions;
-using Url = UrlShortener.WebApi.Models.Url.Post.Url;
+using Nancy.Security;
+using UrlShortener.Infrastructure.Data.Commands.Url;
+using UrlShortener.Infrastructure.Data.Queries.Url;
+using UrlShortener.Infrastructure.Exceptions;
+using UrlShortener.WebApi.Lib.Validators;
 
 namespace UrlShortener.WebApi.Modules
 {
@@ -13,51 +16,69 @@ namespace UrlShortener.WebApi.Modules
         private readonly GetByUrl _getByShortened;
         private readonly CreateCommand _create;
         private readonly ExcludeCommand _exclude;
+        private readonly UrlValidator _validator;
 
         public UrlsModule(GetAll getAll,
                           GetByUrl getByShortened,
                           CreateCommand create,
-                          ExcludeCommand exclude)
+                          ExcludeCommand exclude,
+                          UrlValidator validator)
             : base("urls")
         {
             _getAll = getAll;
             _getByShortened = getByShortened;
             _create = create;
             _exclude = exclude;
+            _validator = validator;
+
+            this.RequiresAuthentication();
 
             Get["/"] = _ => All();
             Get["/{url}"] = parameters => ByUrl(parameters.url);
-            Post["/"] = _ => Create(this.Bind<Url>());
+            Post["/"] = _ => Create(this.Bind<Models.Url.Post.Url>());
             Delete["/{id}"] = parameters => Exclude(parameters.id);
         }
 
         private Response All()
         {
-            var model = _getAll.GetResult(QueryStringFilter);
+            var entities = _getAll.GetResult(QueryStringFilter);
 
-            if (model == null)
+            if (entities == null)
             {
                 throw new NotFoundException("Resource 'urls' with filter passed could not be found");
             }
 
-            return Response.AsJson(model);
+            var models = Mapper.Map<IEnumerable<Models.Url.Get.Url>>(entities);
+
+            return Response.AsJson(models);
         }
 
         private Response ByUrl(string url)
         {
-            var model = _getByShortened.GetResult(url);
+            var entity = _getByShortened.GetResult(url);
 
-            if (model == null)
+            if (entity == null)
             {
                 throw new NotFoundException("Resource 'urls' with url {0} could not be found", url);
             }
 
+            var model = Mapper.Map<Models.Url.Get.Url>(entity);
+
             return Response.AsJson(model);
         }
 
-        private Response Create(Url model)
+        private Response Create(Models.Url.Post.Url model)
         {
-            var entity = _create.Execute(model);
+            var validateResult = _validator.Validate(model);
+
+            if (!validateResult.IsValid)
+            {
+                throw new ValidationException(validateResult.Errors);
+            }
+
+            var entity = Mapper.Map<Entities.Url>(model);
+
+            entity = _create.Execute(entity);
 
             var response = new
             {
