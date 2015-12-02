@@ -7,6 +7,11 @@ namespace UrlShortener.Infrastructure.Data.Commands.Account
     {
         private readonly PartialUpdater _partialUpdater;
 
+        protected UpdateCommand()
+        {
+
+        }
+
         public UpdateCommand(PartialUpdater partialUpdater)
         {
             _partialUpdater = partialUpdater;

@@ -8,12 +8,12 @@ namespace UrlShortener.Infrastructure.Data.Filter.Simple.Data
     {
         public SimpleExpression Apply(Filter filter)
         {
-            var leftOperator = GetLeftOperator(filter);
-            var rightOperator = filter.Where.Property.Value;
+            var leftOperand = GetLeftOperator(filter);
+            var rightOperand = filter.Where.Property.Value;
 
             var @operator = GetOperator(filter);
 
-            return new SimpleExpression(leftOperator, rightOperator, @operator);
+            return new SimpleExpression(leftOperand, rightOperand, @operator);
         }
 
         private static SimpleExpressionType GetOperator(Filter filter)

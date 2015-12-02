@@ -2,6 +2,7 @@
 using Nancy;
 using Nancy.Responses;
 using UrlShortener.Infrastructure.Exceptions;
+using UrlShortener.WebApi.Lib.Exceptions;
 
 namespace UrlShortener.WebApi.Lib
 {

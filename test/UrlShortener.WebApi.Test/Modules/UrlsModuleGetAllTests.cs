@@ -6,6 +6,7 @@ using Nancy;
 using Nancy.Testing;
 using NUnit.Framework;
 using UrlShortener.Entities;
+using UrlShortener.Infrastructure;
 using UrlShortener.Infrastructure.Data.Filter.Simple.Data;
 using UrlShortener.WebApi.Test.Lib;
 using Url = UrlShortener.Entities.Url;
@@ -18,16 +19,19 @@ namespace UrlShortener.WebApi.Test.Modules
         public override void SetUp()
         {
             GetAllMock
-                .Setup(q => q.GetResult(It.IsAny<Filter>()))
-                .Returns(new List<Url>
+                .Setup(q => q.GetResult(It.IsAny<Filter>(), null))
+                .Returns(new Paged<Url>
                 {
-                    new Url
+                    Data = new List<Url>
                     {
-                        Id = 1, 
-                        Address = "http://jroliveira.net",
-                        Account = new Account
+                        new Url
                         {
-                            Id = 1
+                            Id = 1,
+                            Address = "http://jroliveira.net",
+                            Account = new Account
+                            {
+                                Id = 1
+                            }
                         }
                     }
                 });
@@ -39,6 +43,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Get("/urls", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
             });
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -52,7 +57,7 @@ namespace UrlShortener.WebApi.Test.Modules
                 with.HttpRequest();
             });
 
-            GetAllMock.Verify(q => q.GetResult(It.IsAny<Filter>()), Times.Once);
+            GetAllMock.Verify(q => q.GetResult(It.IsAny<Filter>(), null), Times.Once);
         }
 
         [Test]
@@ -61,6 +66,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Get("/urls", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
             });
 
             var actual = "url-get-all.json".Load("response");
@@ -72,7 +78,7 @@ namespace UrlShortener.WebApi.Test.Modules
         public void GetAll_WhenGenericExceptionIsThrown_ShouldReturnErrorJsonAsExpected()
         {
             GetAllMock
-                .Setup(q => q.GetResult(It.IsAny<Filter>()))
+                .Setup(q => q.GetResult(It.IsAny<Filter>(), null))
                 .Throws(new InvalidOperationException("Exception from testing"));
 
             var response = Browser.Get("/urls", with =>
@@ -89,7 +95,7 @@ namespace UrlShortener.WebApi.Test.Modules
         public void GetAll_WhenGenericExceptionIsThrown_HttpStatusCodeShouldBe500InternalServerError()
         {
             GetAllMock
-                .Setup(q => q.GetResult(It.IsAny<Filter>()))
+                .Setup(q => q.GetResult(It.IsAny<Filter>(), null))
                 .Throws(new InvalidOperationException("Exception from testing"));
 
             var response = Browser.Get("/urls", with =>
@@ -104,8 +110,8 @@ namespace UrlShortener.WebApi.Test.Modules
         public void GetAll_WhenResourceNotFound_ShouldReturnErrorJsonAsExpected()
         {
             GetAllMock
-                .Setup(q => q.GetResult(It.IsAny<Filter>()))
-                .Returns(default(List<Url>));
+                .Setup(q => q.GetResult(It.IsAny<Filter>(), null))
+                .Returns(default(Paged<Url>));
 
             var response = Browser.Get("/urls", with =>
             {
@@ -121,8 +127,8 @@ namespace UrlShortener.WebApi.Test.Modules
         public void GetAll_WhenResourceNotFound_HttpStatusCodeShouldBe404NotFound()
         {
             GetAllMock
-                .Setup(q => q.GetResult(It.IsAny<Filter>()))
-                .Returns(default(List<Url>));
+                .Setup(q => q.GetResult(It.IsAny<Filter>(), null))
+                .Returns(default(Paged<Url>));
 
             var response = Browser.Get("/urls", with =>
             {

@@ -35,6 +35,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Post("/urls", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
                 with.Body("url-post.json".Load("request"));
             });
 
@@ -60,6 +61,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Post("/urls", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
                 with.Body("url-post.json".Load("request"));
             });
 

@@ -11,6 +11,7 @@ namespace UrlShortener.WebApi
             {
                 cfg.AddProfile<AccountProfile>();
                 cfg.AddProfile<UrlProfile>();
+                cfg.AddProfile<PagedProfile>();
             });
         }
     }

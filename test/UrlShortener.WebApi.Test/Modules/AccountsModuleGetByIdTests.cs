@@ -30,6 +30,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Get("/accounts/1", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
             });
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -52,6 +53,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Get("/accounts/1", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
             });
 
             var actual = "account-get-by-id-1.json".Load("response");

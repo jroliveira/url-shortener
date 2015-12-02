@@ -6,6 +6,7 @@ using Nancy;
 using Nancy.Testing;
 using NUnit.Framework;
 using UrlShortener.Entities;
+using UrlShortener.Infrastructure;
 using UrlShortener.Infrastructure.Data.Filter.Simple.Data;
 using UrlShortener.WebApi.Test.Lib;
 
@@ -18,13 +19,16 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetAllMock
                 .Setup(q => q.GetResult(It.IsAny<Filter>()))
-                .Returns(new List<Account>
+                .Returns(new Paged<Account>
                 {
-                    new Account
+                    Data = new List<Account>
                     {
-                        Id = 1, 
-                        Name = "Junior", 
-                        Email = "junolive@gmail.com"
+                        new Account
+                        {
+                            Id = 1,
+                            Name = "Junior",
+                            Email = "junolive@gmail.com"
+                        }
                     }
                 });
         }
@@ -35,6 +39,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Get("/accounts", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
             });
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -57,6 +62,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Get("/accounts", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
             });
 
             var actual = "account-get-all.json".Load("response");
@@ -101,7 +107,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetAllMock
                 .Setup(q => q.GetResult(It.IsAny<Filter>()))
-                .Returns(default(List<Account>));
+                .Returns(default(Paged<Account>));
 
             var response = Browser.Get("/accounts", with =>
             {
@@ -118,7 +124,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetAllMock
                 .Setup(q => q.GetResult(It.IsAny<Filter>()))
-                .Returns(default(List<Account>));
+                .Returns(default(Paged<Account>));
 
             var response = Browser.Get("/accounts", with =>
             {

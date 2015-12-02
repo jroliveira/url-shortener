@@ -1,5 +1,4 @@
 ﻿using Simple.Data;
-using UrlShortener.Infrastructure.Exceptions;
 
 namespace UrlShortener.Infrastructure.Data.Queries.Url
 {
@@ -22,14 +21,9 @@ namespace UrlShortener.Infrastructure.Data.Queries.Url
                                   db.Urls.Shortened == shortened)
                               .FirstOrDefault();
 
-            var model = Slapper.AutoMapper.MapDynamic<Entities.Url>(data) as Entities.Url;
+            var entity = Slapper.AutoMapper.MapDynamic<Entities.Url>(data) as Entities.Url;
 
-            if (model == null)
-            {
-                throw new NotFoundException("Resource 'urls' with url shortener {0} could not be found", shortened);
-            }
-
-            return model;
+            return entity;
         }
     }
 }

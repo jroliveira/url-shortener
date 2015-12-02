@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Responses.Negotiation;
 using Nancy.Security;
+using UrlShortener.Infrastructure;
 using UrlShortener.Infrastructure.Data.Commands.Url;
 using UrlShortener.Infrastructure.Data.Queries.Url;
 using UrlShortener.Infrastructure.Exceptions;
+using UrlShortener.WebApi.Lib.Exceptions;
 using UrlShortener.WebApi.Lib.Validators;
 
 namespace UrlShortener.WebApi.Modules
@@ -23,7 +25,6 @@ namespace UrlShortener.WebApi.Modules
                           CreateCommand create,
                           ExcludeCommand exclude,
                           UrlValidator validator)
-            : base("urls")
         {
             _getAll = getAll;
             _getByShortened = getByShortened;
@@ -33,27 +34,28 @@ namespace UrlShortener.WebApi.Modules
 
             this.RequiresAuthentication();
 
-            Get["/"] = _ => All();
-            Get["/{url}"] = parameters => ByUrl(parameters.url);
-            Post["/"] = _ => Create(this.Bind<Models.Url.Post.Url>());
-            Delete["/{id}"] = parameters => Exclude(parameters.id);
+            Get["urls/"] = _ => All();
+            Get["accounts/{id}/urls/"] = parameters => All(parameters.id);
+            Get["urls/{url}"] = parameters => ByUrl(parameters.url);
+            Post["urls/"] = _ => Create(this.Bind<Models.Url.Post.Url>());
+            Delete["urls/{id}"] = parameters => Exclude(parameters.id);
         }
 
-        private Response All()
+        private Negotiator All(int? accountId = null)
         {
-            var entities = _getAll.GetResult(QueryStringFilter);
+            var entities = _getAll.GetResult(QueryStringFilter, accountId);
 
             if (entities == null)
             {
                 throw new NotFoundException("Resource 'urls' with filter passed could not be found");
             }
 
-            var models = Mapper.Map<IEnumerable<Models.Url.Get.Url>>(entities);
+            var models = Mapper.Map<Paged<Models.Url.Get.Url>>(entities);
 
-            return Response.AsJson(models);
+            return Negotiate.WithModel(models);
         }
 
-        private Response ByUrl(string url)
+        private Negotiator ByUrl(string url)
         {
             var entity = _getByShortened.GetResult(url);
 
@@ -64,10 +66,10 @@ namespace UrlShortener.WebApi.Modules
 
             var model = Mapper.Map<Models.Url.Get.Url>(entity);
 
-            return Response.AsJson(model);
+            return Negotiate.WithModel(model);
         }
 
-        private Response Create(Models.Url.Post.Url model)
+        private Negotiator Create(Models.Url.Post.Url model)
         {
             var validateResult = _validator.Validate(model);
 
@@ -86,14 +88,17 @@ namespace UrlShortener.WebApi.Modules
                 Address = string.Format("{0}/{1}", Request.Url, entity.Shortened)
             };
 
-            return Response.AsJson(response, HttpStatusCode.Created);
+            return
+                Negotiate
+                    .WithModel(response)
+                    .WithStatusCode(HttpStatusCode.Created);
         }
 
-        private Response Exclude(int id)
+        private Negotiator Exclude(int id)
         {
             _exclude.Execute(id);
 
-            return HttpStatusCode.NoContent;
+            return Negotiate.WithStatusCode(HttpStatusCode.NoContent);
         }
     }
 }

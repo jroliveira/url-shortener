@@ -1,13 +1,15 @@
-using System.Collections.Generic;
 using AutoMapper;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.ModelBinding;
+using Nancy.Responses.Negotiation;
 using Nancy.Security;
 using Newtonsoft.Json;
+using UrlShortener.Infrastructure;
 using UrlShortener.Infrastructure.Data.Commands.Account;
 using UrlShortener.Infrastructure.Data.Queries.Account;
 using UrlShortener.Infrastructure.Exceptions;
+using UrlShortener.WebApi.Lib.Exceptions;
 using UrlShortener.WebApi.Lib.Validators;
 
 namespace UrlShortener.WebApi.Modules
@@ -45,7 +47,7 @@ namespace UrlShortener.WebApi.Modules
             Delete["/{id}"] = parameters => Exclude(parameters.id);
         }
 
-        private Response All()
+        private Negotiator All()
         {
             var entities = _getAll.GetResult(QueryStringFilter);
 
@@ -54,12 +56,12 @@ namespace UrlShortener.WebApi.Modules
                 throw new NotFoundException("Resource 'accounts' with filter passed could not be found");
             }
 
-            var models = Mapper.Map<IEnumerable<Models.Account.Get.Account>>(entities);
+            var models = Mapper.Map<Paged<Models.Account.Get.Account>>(entities);
 
-            return Response.AsJson(models);
+            return Negotiate.WithModel(models);
         }
 
-        private Response ById(int id)
+        private Negotiator ById(int id)
         {
             var entity = _getById.GetResult(id);
 
@@ -70,10 +72,10 @@ namespace UrlShortener.WebApi.Modules
 
             var model = Mapper.Map<Models.Account.Get.Account>(entity);
 
-            return Response.AsJson(model);
+            return Negotiate.WithModel(model);
         }
 
-        private Response Create(Models.Account.Post.Account model)
+        private Negotiator Create(Models.Account.Post.Account model)
         {
             var validateResult = _validator.Validate(model);
 
@@ -91,21 +93,24 @@ namespace UrlShortener.WebApi.Modules
                 Id = insertedId
             };
 
-            return Response.AsJson(response, HttpStatusCode.Created);
+            return
+                Negotiate
+                    .WithModel(response)
+                    .WithStatusCode(HttpStatusCode.Created);
         }
 
-        private Response Update(int id, dynamic changedModel)
+        private Negotiator Update(int id, dynamic changedModel)
         {
             _update.Execute(id, changedModel);
 
-            return HttpStatusCode.NoContent;
+            return Negotiate.WithStatusCode(HttpStatusCode.NoContent);
         }
 
-        private Response Exclude(int id)
+        private Negotiator Exclude(int id)
         {
             _exclude.Execute(id);
 
-            return HttpStatusCode.NoContent;
+            return Negotiate.WithStatusCode(HttpStatusCode.NoContent);
         }
     }
 }

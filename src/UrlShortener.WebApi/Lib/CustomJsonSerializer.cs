@@ -12,7 +12,7 @@ namespace UrlShortener.WebApi.Lib
             ContractResolver = new CamelCasePropertyNamesContractResolver();
             Converters.Add(new StringEnumConverter { CamelCaseText = true });
             Formatting = Formatting.None;
-            TypeNameHandling = TypeNameHandling.Auto;
+            TypeNameHandling = TypeNameHandling.None;
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
     }

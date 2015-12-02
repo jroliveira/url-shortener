@@ -34,6 +34,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Get("/urls/8edd484c", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
             });
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -56,6 +57,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Get("/urls/8edd484c", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
             });
 
             var actual = "url-get-by-url-8edd484c.json".Load("response");

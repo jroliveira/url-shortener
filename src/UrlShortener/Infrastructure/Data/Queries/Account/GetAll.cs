@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Simple.Data;
 using UrlShortener.Infrastructure.Data.Filter;
 
@@ -31,7 +30,7 @@ namespace UrlShortener.Infrastructure.Data.Queries.Account
             _orderDirection = orderDirection;
         }
 
-        public virtual IEnumerable<Entities.Account> GetResult(Filter.Simple.Data.Filter filter)
+        public virtual Paged<Entities.Account> GetResult(Filter.Simple.Data.Filter filter)
         {
             filter.Resource = "Accounts";
 
@@ -39,8 +38,11 @@ namespace UrlShortener.Infrastructure.Data.Queries.Account
 
             var query = new SimpleQuery(strategy, filter.Resource);
 
-            query = query.Skip(_skip.Apply(filter))
-                         .Take(_limit.Apply(filter));
+            var limit = _limit.Apply(filter);
+            var skip = _skip.Apply(filter);
+
+            query = query.Skip(skip)
+                         .Take(limit);
 
             if (filter.HasWhere)
             {
@@ -52,14 +54,19 @@ namespace UrlShortener.Infrastructure.Data.Queries.Account
                 query = query.OrderBy(_order.Apply(filter), _orderDirection.Apply(filter));
             }
 
-            var model = query.ToList<Entities.Account>();
+            var entities = query.ToList<Entities.Account>();
 
-            if (model == null || !model.Any())
+            if (entities == null || !entities.Any())
             {
                 return null;
             }
 
-            return model;
+            return new Paged<Entities.Account>
+            {
+                Limit = limit,
+                Skip = skip,
+                Data = entities
+            };
         }
     }
 }

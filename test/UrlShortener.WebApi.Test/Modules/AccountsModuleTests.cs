@@ -1,10 +1,12 @@
 using Moq;
+using Nancy.Hal.Configuration;
 using Nancy.Testing;
 using NUnit.Framework;
 using UrlShortener.Infrastructure.Data.Commands.Account;
 using UrlShortener.Infrastructure.Data.Queries.Account;
 using UrlShortener.WebApi.Lib;
 using UrlShortener.WebApi.Lib.Authentication;
+using UrlShortener.WebApi.Lib.Hal;
 using UrlShortener.WebApi.Lib.Validators;
 using UrlShortener.WebApi.Modules;
 
@@ -38,6 +40,7 @@ namespace UrlShortener.WebApi.Test.Modules
                 with.ApplicationStartup((container, pipelines) =>
                 {
                     AutoMapperConfig.RegisterProfiles();
+                    container.Register<IProvideHalTypeConfiguration>(Hypermedia.Configuration());
                 });
 
                 with.RequestStartup((container, pipelines, context) =>

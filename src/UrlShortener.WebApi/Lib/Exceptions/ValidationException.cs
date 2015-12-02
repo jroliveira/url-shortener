@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentValidation.Results;
 
-namespace UrlShortener.Infrastructure.Exceptions
+namespace UrlShortener.WebApi.Lib.Exceptions
 {
     public class ValidationException : Exception
     {

@@ -12,5 +12,10 @@ namespace UrlShortener.WebApi.Modules
         {
             Options["/"] = _ => HttpStatusCode.OK;
         }
+
+        protected BaseModule()
+        {
+
+        }
     }
 }

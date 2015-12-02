@@ -18,6 +18,7 @@ namespace UrlShortener.WebApi.Test.Modules
             var response = Browser.Delete("/accounts/1", with =>
             {
                 with.HttpRequest();
+                with.Header("Accept", "application/json");
             });
 
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);

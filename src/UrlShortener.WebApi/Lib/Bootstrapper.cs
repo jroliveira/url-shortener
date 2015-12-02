@@ -2,6 +2,7 @@
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
+using Nancy.Hal.Configuration;
 using Nancy.Json;
 using Nancy.TinyIoc;
 using Newtonsoft.Json;
@@ -9,6 +10,7 @@ using Simple.Data;
 using UrlShortener.Infrastructure;
 using UrlShortener.Infrastructure.Data.Filter;
 using UrlShortener.Infrastructure.Data.Filter.Simple.Data;
+using UrlShortener.WebApi.Lib.Hal;
 using UrlShortener.WebApi.Lib.Validators;
 
 namespace UrlShortener.WebApi.Lib
@@ -46,6 +48,7 @@ namespace UrlShortener.WebApi.Lib
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer existingContainer)
         {
+            existingContainer.Register<IProvideHalTypeConfiguration>(Hypermedia.Configuration());
             existingContainer.Register<JsonSerializer, CustomJsonSerializer>();
             existingContainer.Register<ITokenizer>(new Tokenizer());
         }

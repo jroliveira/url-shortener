@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Simple.Data;
 using UrlShortener.Infrastructure.Data.Filter;
-using UrlShortener.Infrastructure.Exceptions;
 
 namespace UrlShortener.Infrastructure.Data.Queries.Url
 {
@@ -26,13 +24,16 @@ namespace UrlShortener.Infrastructure.Data.Queries.Url
             _order = order;
         }
 
-        public virtual IEnumerable<Entities.Url> GetResult(Filter.Simple.Data.Filter filter)
+        public virtual Paged<Entities.Url> GetResult(Filter.Simple.Data.Filter filter, int? accountId = null)
         {
             filter.Resource = "Urls";
 
             DataStrategy strategy = Database.Open();
 
             var query = new SimpleQuery(strategy, filter.Resource);
+
+            var limit = _limit.Apply(filter);
+            var skip = _skip.Apply(filter);
 
             dynamic accounts;
 
@@ -45,6 +46,13 @@ namespace UrlShortener.Infrastructure.Data.Queries.Url
                          .Skip(_skip.Apply(filter))
                          .Take(_limit.Apply(filter));
 
+            if (accountId.HasValue)
+            {
+                var leftOperand = new ObjectReference("AccountId", ObjectReference.FromString("Urls"));
+
+                query.Where(new SimpleExpression(leftOperand, accountId, SimpleExpressionType.Equal));
+            }
+
             if (filter.HasOrder)
             {
                 query = query.OrderBy(_order.Apply(filter), OrderByDirection.Ascending);
@@ -52,15 +60,20 @@ namespace UrlShortener.Infrastructure.Data.Queries.Url
 
             var data = query.ToList<dynamic>();
 
-            var model = Slapper.AutoMapper.MapDynamic<Entities.Url>(data)
-                                          .ToList();
+            var entities = Slapper.AutoMapper.MapDynamic<Entities.Url>(data)
+                                             .ToList();
 
-            if (model == null || !model.Any())
+            if (!entities.Any())
             {
-                throw new NotFoundException("Resource 'urls' with filter passed could not be found");
+                return null;
             }
 
-            return model;
+            return new Paged<Entities.Url>
+            {
+                Limit = limit,
+                Skip = skip,
+                Data = entities
+            };
         }
     }
 }
