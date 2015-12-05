@@ -6,6 +6,7 @@ using Nancy.Testing;
 using NUnit.Framework;
 using UrlShortener.Infrastructure.Exceptions;
 using UrlShortener.WebApi.Test.Lib;
+using UrlShortener.WebApi.Test.Lib.Extensions;
 
 namespace UrlShortener.WebApi.Test.Modules
 {

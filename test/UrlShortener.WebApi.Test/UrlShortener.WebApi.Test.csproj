@@ -68,8 +68,16 @@
       <HintPath>..\..\packages\Nancy.Hal.1.1.0\lib\net45\Nancy.Hal.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Nancy.Serialization.JsonNet, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nancy.Serialization.JsonNet.1.4.1\lib\net40\Nancy.Serialization.JsonNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Nancy.Testing, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Nancy.Testing.1.4.1\lib\net40\Nancy.Testing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
@@ -89,7 +97,6 @@
     <Compile Include="Lib\Mappings\AccountProfileTests.cs" />
     <Compile Include="Lib\Mappings\ProfileTests.cs" />
     <Compile Include="Lib\Mappings\UrlProfileTests.cs" />
-    <Compile Include="Lib\Project.cs" />
     <Compile Include="Lib\Validators\AccountValidatorTests.cs" />
     <Compile Include="Lib\Validators\UrlValidatorTests.cs" />
     <Compile Include="Modules\AccountsModulePostTests.cs">
@@ -98,7 +105,7 @@
     <Compile Include="Modules\AccountsModuleGetAllTests.cs">
       <DependentUpon>AccountsModuleTests.cs</DependentUpon>
     </Compile>
-    <Compile Include="Lib\StringExtensions.cs" />
+    <Compile Include="Lib\Extensions\StringExtensions.cs" />
     <Compile Include="Modules\AccountsModuleGetByIdTests.cs">
       <DependentUpon>AccountsModuleTests.cs</DependentUpon>
     </Compile>
@@ -126,25 +133,63 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Modules\Request\url-post.json" />
-    <None Include="Modules\Request\account-post.json" />
-    <None Include="Modules\Request\account-put.json" />
-    <None Include="Modules\Response\url-post-conflict.json" />
-    <None Include="Modules\Response\account-post-conflict.json" />
-    <None Include="Modules\Response\url-post-8edd484c.json" />
-    <None Include="Modules\Response\url-get-by-url-8edd484c.json" />
-    <None Include="Modules\Response\url-get-by-url-8edd484c-not-found.json" />
-    <None Include="Modules\Response\url-get-all.json" />
-    <None Include="Modules\Response\url-get-all-not-found.json" />
-    <None Include="Modules\Response\url-delete-1-not-found.json" />
-    <None Include="Modules\Response\account-post-1.json" />
-    <None Include="Modules\Response\account-delete-1-not-found.json" />
-    <None Include="Modules\Response\account-put-1-not-found.json" />
-    <None Include="Modules\Response\account-get-by-id-1-not-found.json" />
-    <None Include="Modules\Response\account-get-by-id-1.json" />
-    <None Include="Modules\Response\account-get-all.json" />
-    <None Include="Modules\Response\account-get-all-not-found.json" />
-    <None Include="Modules\Response\error.json" />
+    <None Include="Modules\Request\url-post.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Request\account-post.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Request\account-put.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\url-post-conflict.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\account-post-conflict.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\url-post-8edd484c.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\url-get-by-url-8edd484c.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\url-get-by-url-8edd484c-not-found.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\url-get-all.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\url-get-all-not-found.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\url-delete-1-not-found.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\account-post-1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\account-delete-1-not-found.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\account-put-1-not-found.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\account-get-by-id-1-not-found.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\account-get-by-id-1.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\account-get-all.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\account-get-all-not-found.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Modules\Response\error.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

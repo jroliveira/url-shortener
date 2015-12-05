@@ -12,7 +12,7 @@ namespace UrlShortener.WebApi.Lib
         {
             var model = new
             {
-                errors = new[] { exception.Message }
+                Errors = new[] { exception.Message }
             };
 
             var response = new JsonResponse(model, new DefaultJsonSerializer());

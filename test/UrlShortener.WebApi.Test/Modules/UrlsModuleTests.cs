@@ -1,6 +1,7 @@
 ﻿using Moq;
 using Nancy.Hal.Configuration;
 using Nancy.Testing;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using UrlShortener.Infrastructure.Data.Commands.Url;
 using UrlShortener.Infrastructure.Data.Queries.Url;
@@ -38,6 +39,7 @@ namespace UrlShortener.WebApi.Test.Modules
                 with.ApplicationStartup((container, pipelines) =>
                 {
                     AutoMapperConfig.RegisterProfiles();
+                    container.Register<JsonSerializer, CustomJsonSerializer>();
                     container.Register<IProvideHalTypeConfiguration>(Hypermedia.Configuration());
                 });
 

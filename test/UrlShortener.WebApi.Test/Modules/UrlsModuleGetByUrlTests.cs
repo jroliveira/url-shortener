@@ -6,6 +6,7 @@ using Nancy.Testing;
 using NUnit.Framework;
 using UrlShortener.Entities;
 using UrlShortener.WebApi.Test.Lib;
+using UrlShortener.WebApi.Test.Lib.Extensions;
 using Url = UrlShortener.Entities.Url;
 
 namespace UrlShortener.WebApi.Test.Modules

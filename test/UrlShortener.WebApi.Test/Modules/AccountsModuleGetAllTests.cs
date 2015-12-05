@@ -9,6 +9,7 @@ using UrlShortener.Entities;
 using UrlShortener.Infrastructure;
 using UrlShortener.Infrastructure.Data.Filter.Simple.Data;
 using UrlShortener.WebApi.Test.Lib;
+using UrlShortener.WebApi.Test.Lib.Extensions;
 
 namespace UrlShortener.WebApi.Test.Modules
 {
