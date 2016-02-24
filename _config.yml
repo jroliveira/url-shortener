@@ -1,0 +1,26 @@
+# Dependencies
+markdown: redcarpet
+
+pygments: false
+
+# Permalinks
+permalink: pretty
+
+# Setup
+title: angular crud
+url: jroliveira.net
+
+author:
+  name: Júnior Oliveira
+  
+exclude:
+  - "Gruntfile.coffee"
+  - "bower_components"
+  - "bower.json"
+  - "node_modules"
+  - "package.json"
+  - ".gitignore"
+  - "README.md"
+  
+include:
+  - .nojekyll
