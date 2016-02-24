@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using System.Reflection;
+using Nancy;
 
 namespace UrlShortener.WebApi.Modules
 {
@@ -6,7 +7,13 @@ namespace UrlShortener.WebApi.Modules
     {
         public HomeModule()
         {
-            Get["/"] = _ => View["index.html"];
+            var info = Assembly.GetExecutingAssembly().GetName();
+
+            Get["/"] = _ => Response.AsJson(new
+            {
+                version = info.Version.ToString(),
+                messsage = "I'm working..."
+            });
         }
     }
 }

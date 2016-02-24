@@ -101,34 +101,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\print.css" />
-    <Content Include="Content\css\reset.css" />
-    <Content Include="Content\css\screen.css" />
-    <Content Include="Content\css\style.css" />
-    <Content Include="Content\css\typography.css" />
-    <Content Include="Content\fonts\droid-sans-v6-latin-700.svg" />
-    <Content Include="Content\fonts\droid-sans-v6-latin-regular.svg" />
-    <Content Include="Views\Home\index.html" />
-    <Content Include="Content\lang\en.js" />
-    <Content Include="Content\lang\es.js" />
-    <Content Include="Content\lang\pt.js" />
-    <Content Include="Content\lang\ru.js" />
-    <Content Include="Content\lang\tr.js" />
-    <Content Include="Content\lang\translator.js" />
-    <Content Include="Content\lang\zh-cn.js" />
-    <Content Include="Content\lib\backbone-min.js" />
-    <Content Include="Content\lib\handlebars-2.0.0.js" />
-    <Content Include="Content\lib\highlight.7.3.pack.js" />
-    <Content Include="Content\lib\jquery-1.8.0.min.js" />
-    <Content Include="Content\lib\jquery.ba-bbq.min.js" />
-    <Content Include="Content\lib\jquery.slideto.min.js" />
-    <Content Include="Content\lib\jquery.wiggle.min.js" />
-    <Content Include="Content\lib\marked.js" />
-    <Content Include="Content\lib\swagger-oauth.js" />
-    <Content Include="Content\lib\underscore-min.js" />
-    <Content Include="Views\Home\o2c.html" />
-    <Content Include="Content\swagger-ui.js" />
-    <Content Include="Content\swagger-ui.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -167,15 +139,6 @@
     <Compile Include="Lib\Validators\UrlValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fonts\droid-sans-v6-latin-700.eot" />
-    <Content Include="Content\fonts\droid-sans-v6-latin-700.ttf" />
-    <Content Include="Content\fonts\droid-sans-v6-latin-700.woff" />
-    <Content Include="Content\fonts\droid-sans-v6-latin-700.woff2" />
-    <Content Include="Content\fonts\droid-sans-v6-latin-regular.eot" />
-    <Content Include="Content\fonts\droid-sans-v6-latin-regular.ttf" />
-    <Content Include="Content\fonts\droid-sans-v6-latin-regular.woff" />
-    <Content Include="Content\fonts\droid-sans-v6-latin-regular.woff2" />
-    <Content Include="Content\lib\underscore-min.map" />
     <Content Include="swagger.json" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
