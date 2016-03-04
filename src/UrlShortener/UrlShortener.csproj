@@ -40,28 +40,28 @@
       <HintPath>..\..\packages\FluentMigrator.1.6.1\lib\40\FluentMigrator.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Restful.Query.Filter, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Restful.Query.Filter.1.0.0.4\lib\net40\Restful.Query.Filter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Simple.Data, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Simple.Data.Core.0.19.0.0\lib\net40\Simple.Data.dll</HintPath>
+    <Reference Include="Simple.Data, Version=2.0.0.51533, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Simple.Data.Core.2.0.0-alpha1\lib\net45\Simple.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Simple.Data.Ado, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Simple.Data.Ado.0.19.0.0\lib\net40\Simple.Data.Ado.dll</HintPath>
+    <Reference Include="Simple.Data.Ado, Version=2.0.0.51533, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Simple.Data.Ado.2.0.0-alpha1\lib\net45\Simple.Data.Ado.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Simple.Data.SqlServer, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Simple.Data.SqlServer.0.19.0.0\lib\net40\Simple.Data.SqlServer.dll</HintPath>
+    <Reference Include="Simple.Data.SqlServer, Version=2.0.0.51533, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Simple.Data.SqlServer.2.0.0-alpha1\lib\net45\Simple.Data.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Slapper, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Slapper.AutoMapper.1.0.0.6\lib\Slapper.dll</HintPath>
+    <Reference Include="Slapper, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Slapper.AutoMapper.1.0.0.8\lib\Slapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

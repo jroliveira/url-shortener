@@ -1,10 +1,11 @@
-﻿using Simple.Data;
+﻿using System.Threading.Tasks;
+using Simple.Data;
 
 namespace UrlShortener.Infrastructure.Data.Commands.Url
 {
     public class CreateCommand
     {
-        public virtual Entities.Url Execute(Entities.Url entity)
+        public async virtual Task<Entities.Url> Execute(Entities.Url entity)
         {
             entity.Shorten();
 
@@ -19,7 +20,7 @@ namespace UrlShortener.Infrastructure.Data.Commands.Url
                 AccountId = entity.Account.Id
             };
 
-            var inserted = db.Urls.Insert(data);
+            var inserted = await db.Urls.Insert(data);
 
             entity.Id = inserted.Id;
 

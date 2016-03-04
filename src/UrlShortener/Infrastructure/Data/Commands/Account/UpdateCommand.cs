@@ -1,4 +1,5 @@
-﻿using Simple.Data;
+﻿using System.Threading.Tasks;
+using Simple.Data;
 using UrlShortener.Infrastructure.Exceptions;
 
 namespace UrlShortener.Infrastructure.Data.Commands.Account
@@ -17,11 +18,11 @@ namespace UrlShortener.Infrastructure.Data.Commands.Account
             _partialUpdater = partialUpdater;
         }
 
-        public virtual void Execute(int id, dynamic changedModel)
+        public virtual async Task Execute(int id, dynamic changedModel)
         {
             var db = Database.Open();
 
-            Entities.Account entity = db.Accounts.Get(id);
+            Entities.Account entity = await db.Accounts.Get(id);
 
             if (entity == null || entity.Deleted)
             {
@@ -30,7 +31,7 @@ namespace UrlShortener.Infrastructure.Data.Commands.Account
 
             _partialUpdater.Apply(changedModel, entity);
 
-            db.Accounts.Update(entity);
+            await db.Accounts.Update(entity);
         }
     }
 }

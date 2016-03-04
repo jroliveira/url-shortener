@@ -30,7 +30,7 @@ namespace UrlShortener.WebApi.Test.Lib.Mappings
             modelStub.Setup(m => m.Address).Returns("http://jroliveira.net");
             modelStub.Setup(m => m.Account.Id).Returns(1);
 
-            var entity = MappingEngine.Map<Url>(modelStub.Object);
+            var entity = Mapper.Map<Url>(modelStub.Object);
 
             _entityStub.Setup(e => e.Id).Returns(0);
             _entityStub.Setup(e => e.Address).Returns("http://jroliveira.net");

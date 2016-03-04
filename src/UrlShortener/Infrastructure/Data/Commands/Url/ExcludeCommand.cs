@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Simple.Data;
 using UrlShortener.Infrastructure.Exceptions;
 
@@ -5,11 +6,11 @@ namespace UrlShortener.Infrastructure.Data.Commands.Url
 {
     public class ExcludeCommand
     {
-        public virtual void Execute(int id)
+        public virtual async Task Execute(int id)
         {
             var db = Database.Open();
 
-            Entities.Url entity = db.Urls.Get(id);
+            Entities.Url entity = await db.Urls.Get(id);
 
             if (entity == null || entity.Deleted)
             {
@@ -18,7 +19,7 @@ namespace UrlShortener.Infrastructure.Data.Commands.Url
 
             entity.MarkAsDeleted();
 
-            db.Urls.Update(entity);
+            await db.Urls.Update(entity);
         }
     }
 }

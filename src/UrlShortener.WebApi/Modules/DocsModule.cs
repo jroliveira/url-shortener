@@ -12,10 +12,10 @@ namespace UrlShortener.WebApi.Modules
         {
             _rootPathProvider = rootPathProvider;
 
-            Get["/"] = _ => Index();
+            Get["/"] = Index;
         }
 
-        private Response Index()
+        private Response Index(dynamic _)
         {
             var rootPath = _rootPathProvider.GetRootPath();
             var file = Path.Combine(rootPath, "swagger.json");

@@ -1,11 +1,11 @@
 using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using Nancy;
 using Nancy.Testing;
 using NUnit.Framework;
 using UrlShortener.Entities;
-using UrlShortener.WebApi.Test.Lib;
 using UrlShortener.WebApi.Test.Lib.Extensions;
 
 namespace UrlShortener.WebApi.Test.Modules
@@ -17,12 +17,12 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetByIdMock
                 .Setup(q => q.GetResult(1))
-                .Returns(new Account
+                .Returns(Task.FromResult(new Account
                 {
                     Id = 1,
                     Name = "Junior",
                     Email = "junolive@gmail.com"
-                });
+                }));
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetByIdMock
                 .Setup(q => q.GetResult(1))
-                .Returns(default(Account));
+                .Returns(Task.FromResult(default(Account)));
 
             var response = Browser.Get("/accounts/1", with =>
             {
@@ -116,7 +116,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetByIdMock
                 .Setup(q => q.GetResult(1))
-                .Returns(default(Account));
+                .Returns(Task.FromResult(default(Account)));
 
             var response = Browser.Get("/accounts/1", with =>
             {

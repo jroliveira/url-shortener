@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using AutoMapper;
+using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
@@ -11,6 +12,7 @@ using UrlShortener.Infrastructure;
 using UrlShortener.Infrastructure.Data.Filter;
 using UrlShortener.Infrastructure.Data.Filter.Simple.Data;
 using UrlShortener.WebApi.Lib.Hal;
+using UrlShortener.WebApi.Lib.Mappings;
 using UrlShortener.WebApi.Lib.Validators;
 
 namespace UrlShortener.WebApi.Lib
@@ -20,8 +22,6 @@ namespace UrlShortener.WebApi.Lib
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             JsonSettings.MaxJsonLength = int.MaxValue;
-
-            AutoMapperConfig.RegisterProfiles();
 
             base.ApplicationStartup(container, pipelines);
         }
@@ -55,6 +55,14 @@ namespace UrlShortener.WebApi.Lib
 
         protected override void ConfigureRequestContainer(TinyIoCContainer existingContainer, NancyContext context)
         {
+            var autoMapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<AccountProfile>();
+                cfg.AddProfile<UrlProfile>();
+                cfg.AddProfile<PagedProfile>();
+            });
+
+            existingContainer.Register((container, overloads) => autoMapperConfig.CreateMapper());
             existingContainer.Register<PartialUpdater>();
 
             /* Filters */

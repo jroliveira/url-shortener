@@ -1,11 +1,11 @@
 using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using Nancy;
 using Nancy.Testing;
 using NUnit.Framework;
 using UrlShortener.Entities;
-using UrlShortener.WebApi.Test.Lib;
 using UrlShortener.WebApi.Test.Lib.Extensions;
 using Url = UrlShortener.Entities.Url;
 
@@ -18,7 +18,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetByUrlMock
                 .Setup(q => q.GetResult("8edd484c"))
-                .Returns(new Url
+                .Returns(Task.FromResult(new Url
                 {
                     Id = 1,
                     Address = "http://jroliveira.net",
@@ -26,7 +26,7 @@ namespace UrlShortener.WebApi.Test.Modules
                     {
                         Id = 1
                     }
-                });
+                }));
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetByUrlMock
                 .Setup(q => q.GetResult("8edd484c"))
-                .Returns(default(Url));
+                .Returns(Task.FromResult(default(Url)));
 
             var response = Browser.Get("/urls/8edd484c", with =>
             {
@@ -120,7 +120,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetByUrlMock
                 .Setup(q => q.GetResult("8edd484c"))
-                .Returns(default(Url));
+                .Returns(Task.FromResult(default(Url)));
 
             var response = Browser.Get("/urls/8edd484c", with =>
             {

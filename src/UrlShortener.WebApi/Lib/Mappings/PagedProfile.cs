@@ -7,8 +7,7 @@ namespace UrlShortener.WebApi.Lib.Mappings
     {
         protected override void Configure()
         {
-            Mapper
-                .CreateMap(typeof(Paged<>), typeof(Paged<>));
+            CreateMap(typeof(Paged<>), typeof(Paged<>));
         }
     }
 }

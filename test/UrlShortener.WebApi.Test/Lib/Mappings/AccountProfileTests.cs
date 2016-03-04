@@ -31,7 +31,7 @@ namespace UrlShortener.WebApi.Test.Lib.Mappings
             modelStub.Setup(m => m.Password).Returns("123456");
             modelStub.Setup(m => m.ConfirmPassword).Returns("123456");
 
-            var entity = MappingEngine.Map<Account>(modelStub.Object);
+            var entity = Mapper.Map<Account>(modelStub.Object);
 
             _entityStub.Setup(e => e.Name).Returns("Junior Oliveira");
             _entityStub.Setup(e => e.Email).Returns("junolive@gmail.com");
@@ -46,7 +46,7 @@ namespace UrlShortener.WebApi.Test.Lib.Mappings
             var modelStub = new Mock<Models.Url.Account>();
             modelStub.Setup(m => m.Id).Returns(1);
 
-            var entity = MappingEngine.Map<Account>(modelStub.Object);
+            var entity = Mapper.Map<Account>(modelStub.Object);
 
             _entityStub.Setup(e => e.Id).Returns(1);
 

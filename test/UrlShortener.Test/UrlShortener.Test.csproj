@@ -36,12 +36,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentAssertions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FluentAssertions.4.1.0\lib\net45\FluentAssertions.dll</HintPath>
+    <Reference Include="FluentAssertions, Version=4.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentAssertions.4.2.2\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentAssertions.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FluentAssertions.4.1.0\lib\net45\FluentAssertions.Core.dll</HintPath>
+    <Reference Include="FluentAssertions.Core, Version=4.2.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentAssertions.4.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -57,8 +57,8 @@
       <HintPath>..\..\packages\Restful.Query.Filter.1.0.0.4\lib\net40\Restful.Query.Filter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Simple.Data, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Simple.Data.Core.0.19.0.0\lib\net40\Simple.Data.dll</HintPath>
+    <Reference Include="Simple.Data, Version=2.0.0.51533, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Simple.Data.Core.2.0.0-alpha1\lib\net45\Simple.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -70,9 +70,6 @@
     <Compile Include="Entities\AccountTests.cs" />
     <Compile Include="Entities\EntityTests.cs" />
     <Compile Include="Entities\UrlTests.cs" />
-    <Compile Include="Infrastructure\Data\Commands\Account\UpdateCommandTests.cs" />
-    <Compile Include="Infrastructure\Data\Commands\Account\ExcludeCommandTests.cs" />
-    <Compile Include="Infrastructure\Data\Commands\Account\CreateCommandTests.cs" />
     <Compile Include="Infrastructure\Data\Filter\Simple.Data\LimitTests.cs" />
     <Compile Include="Infrastructure\Data\Filter\Simple.Data\OrderDirectionTests.cs" />
     <Compile Include="Infrastructure\Data\Filter\Simple.Data\SkipTests.cs" />
@@ -90,6 +87,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

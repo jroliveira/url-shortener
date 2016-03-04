@@ -1,8 +1,9 @@
+using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.ModelBinding;
-using Nancy.Responses.Negotiation;
 using Nancy.Security;
 using Newtonsoft.Json;
 using UrlShortener.Infrastructure;
@@ -22,13 +23,16 @@ namespace UrlShortener.WebApi.Modules
         private readonly UpdateCommand _update;
         private readonly ExcludeCommand _exclude;
         private readonly AccountValidator _validator;
+        private readonly IMapper _mapper;
 
-        public AccountsModule(GetAll getAll,
-                              GetById getById,
-                              CreateCommand create,
-                              UpdateCommand update,
-                              ExcludeCommand exclude,
-                              AccountValidator validator)
+        public AccountsModule(
+            GetAll getAll,
+            GetById getById,
+            CreateCommand create,
+            UpdateCommand update,
+            ExcludeCommand exclude,
+            AccountValidator validator, 
+            IMapper mapper)
             : base("accounts")
         {
             _getAll = getAll;
@@ -37,46 +41,49 @@ namespace UrlShortener.WebApi.Modules
             _update = update;
             _exclude = exclude;
             _validator = validator;
+            _mapper = mapper;
 
             this.RequiresAuthentication();
 
-            Get["/"] = _ => All();
-            Get["/{id}"] = parameters => ById(parameters.id);
-            Post["/"] = _ => Create(this.Bind<Models.Account.Post.Account>());
-            Put["/{id}"] = parameters => Update(parameters.id, JsonConvert.DeserializeObject(Request.Body.AsString()));
-            Delete["/{id}"] = parameters => Exclude(parameters.id);
+            Get["/", true] = All;
+            Get["/{id}", true] = ById;
+            Post["/", true] = Create;
+            Put["/{id}", true] = Update;
+            Delete["/{id}", true] = Exclude;
         }
 
-        private Negotiator All()
+        private async Task<dynamic> All(dynamic _, CancellationToken ct)
         {
-            var entities = _getAll.GetResult(QueryStringFilter);
+            var entities = await _getAll.GetResult(QueryStringFilter);
 
             if (entities == null)
             {
                 throw new NotFoundException("Resource 'accounts' with filter passed could not be found");
             }
 
-            var models = Mapper.Map<Paged<Models.Account.Get.Account>>(entities);
+            var models = _mapper.Map<Paged<Models.Account.Get.Account>>(entities);
 
             return Negotiate.WithModel(models);
         }
 
-        private Negotiator ById(int id)
+        private async Task<dynamic> ById(dynamic parameters, CancellationToken ct)
         {
-            var entity = _getById.GetResult(id);
+            int id = parameters.id;
+            var entity = await _getById.GetResult(id);
 
             if (entity == null)
             {
                 throw new NotFoundException("Resource 'accounts' with id {0} could not be found", id);
             }
 
-            var model = Mapper.Map<Models.Account.Get.Account>(entity);
+            var model = _mapper.Map<Models.Account.Get.Account>(entity);
 
             return Negotiate.WithModel(model);
         }
 
-        private Negotiator Create(Models.Account.Post.Account model)
+        private async Task<dynamic> Create(dynamic _, CancellationToken ct)
         {
+            var model = this.Bind<Models.Account.Post.Account>();
             var validateResult = _validator.Validate(model);
 
             if (!validateResult.IsValid)
@@ -84,9 +91,9 @@ namespace UrlShortener.WebApi.Modules
                 throw new ValidationException(validateResult.Errors);
             }
 
-            var entity = Mapper.Map<Entities.Account>(model);
+            var entity = _mapper.Map<Entities.Account>(model);
 
-            var insertedId = _create.Execute(entity);
+            var insertedId = await _create.Execute(entity);
 
             var response = new
             {
@@ -99,16 +106,21 @@ namespace UrlShortener.WebApi.Modules
                     .WithStatusCode(HttpStatusCode.Created);
         }
 
-        private Negotiator Update(int id, dynamic changedModel)
+        private async Task<dynamic> Update(dynamic parameters, CancellationToken ct)
         {
-            _update.Execute(id, changedModel);
+            int id = parameters.id;
+            dynamic changedModel = JsonConvert.DeserializeObject(Request.Body.AsString());
+
+            await _update.Execute(id, changedModel);
 
             return Negotiate.WithStatusCode(HttpStatusCode.NoContent);
         }
 
-        private Negotiator Exclude(int id)
+        private async Task<dynamic> Exclude(dynamic parameters, CancellationToken ct)
         {
-            _exclude.Execute(id);
+            int id = parameters.id;
+
+            await _exclude.Execute(id);
 
             return Negotiate.WithStatusCode(HttpStatusCode.NoContent);
         }

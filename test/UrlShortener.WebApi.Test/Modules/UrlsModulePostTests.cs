@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using FluentAssertions;
 using FluentValidation.Results;
 using Moq;
 using Nancy;
 using Nancy.Testing;
 using NUnit.Framework;
-using UrlShortener.WebApi.Test.Lib;
 using UrlShortener.WebApi.Test.Lib.Extensions;
 using Url = UrlShortener.Entities.Url;
 
@@ -23,7 +23,7 @@ namespace UrlShortener.WebApi.Test.Modules
 
             CreateMock
                 .Setup(c => c.Execute(It.IsAny<Url>()))
-                .Returns(entityStub.Object);
+                .Returns(Task.FromResult(entityStub.Object));
 
             UrlValidatorMock
                 .Setup(v => v.Validate(It.IsAny<Models.Url.Post.Url>()))

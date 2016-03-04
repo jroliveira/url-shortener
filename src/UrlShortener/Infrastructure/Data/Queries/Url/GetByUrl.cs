@@ -1,27 +1,29 @@
-﻿using Simple.Data;
+﻿using System.Threading.Tasks;
+using Simple.Data;
+using Slapper;
 
 namespace UrlShortener.Infrastructure.Data.Queries.Url
 {
     public class GetByUrl
     {
-        public virtual Entities.Url GetResult(string shortened)
+        public virtual async Task<Entities.Url> GetResult(string shortened)
         {
             var db = Database.Open();
 
             dynamic accounts;
 
-            var data = db.Urls.All()
-                              .Join(db.Accounts, out accounts)
-                                  .On(db.Urls.AccountId == accounts.Id)
-                              .Select(
-                                  db.Urls.Id,
-                                  db.Urls.Address,
-                                  accounts.Id.As("Account_Id"))
-                              .Where(
-                                  db.Urls.Shortened == shortened)
-                              .FirstOrDefault();
+            var data = await db.Urls.All()
+                                    .Join(db.Accounts, out accounts)
+                                        .On(db.Urls.AccountId == accounts.Id)
+                                    .Select(
+                                        db.Urls.Id,
+                                        db.Urls.Address,
+                                        accounts.Id.As("Account_Id"))
+                                    .Where(
+                                        db.Urls.Shortened == shortened)
+                                    .FirstOrDefault();
 
-            var entity = Slapper.AutoMapper.MapDynamic<Entities.Url>(data) as Entities.Url;
+            var entity = AutoMapper.MapDynamic<Entities.Url>(data) as Entities.Url;
 
             return entity;
         }

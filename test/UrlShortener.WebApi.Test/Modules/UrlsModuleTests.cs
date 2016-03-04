@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using AutoMapper;
+using Moq;
 using Nancy.Hal.Configuration;
 using Nancy.Testing;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using UrlShortener.Infrastructure.Data.Queries.Url;
 using UrlShortener.WebApi.Lib;
 using UrlShortener.WebApi.Lib.Authentication;
 using UrlShortener.WebApi.Lib.Hal;
+using UrlShortener.WebApi.Lib.Mappings;
 using UrlShortener.WebApi.Lib.Validators;
 using UrlShortener.WebApi.Modules;
 
@@ -38,7 +40,15 @@ namespace UrlShortener.WebApi.Test.Modules
 
                 with.ApplicationStartup((container, pipelines) =>
                 {
-                    AutoMapperConfig.RegisterProfiles();
+                    var autoMapperConfig = new MapperConfiguration(cfg =>
+                    {
+                        cfg.AddProfile<AccountProfile>();
+                        cfg.AddProfile<UrlProfile>();
+                        cfg.AddProfile<PagedProfile>();
+                    });
+
+                    container.Register((factory, overloads) => autoMapperConfig.CreateMapper());
+
                     container.Register<JsonSerializer, CustomJsonSerializer>();
                     container.Register<IProvideHalTypeConfiguration>(Hypermedia.Configuration());
                 });

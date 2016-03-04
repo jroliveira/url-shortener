@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Simple.Data;
+using Slapper;
 using UrlShortener.Infrastructure.Data.Filter;
 
 namespace UrlShortener.Infrastructure.Data.Queries.Url
@@ -15,16 +17,17 @@ namespace UrlShortener.Infrastructure.Data.Queries.Url
 
         }
 
-        public GetAll(ISkip<Filter.Simple.Data.Filter> skip,
-                      ILimit<Filter.Simple.Data.Filter> limit,
-                      IOrder<Filter.Simple.Data.Filter, ObjectReference> order)
+        public GetAll(
+            ISkip<Filter.Simple.Data.Filter> skip,
+            ILimit<Filter.Simple.Data.Filter> limit,
+            IOrder<Filter.Simple.Data.Filter, ObjectReference> order)
         {
             _skip = skip;
             _limit = limit;
             _order = order;
         }
 
-        public virtual Paged<Entities.Url> GetResult(Filter.Simple.Data.Filter filter, int? accountId = null)
+        public virtual async Task<Paged<Entities.Url>> GetResult(Filter.Simple.Data.Filter filter, int? accountId = null)
         {
             filter.Resource = "Urls";
 
@@ -58,10 +61,9 @@ namespace UrlShortener.Infrastructure.Data.Queries.Url
                 query = query.OrderBy(_order.Apply(filter), OrderByDirection.Ascending);
             }
 
-            var data = query.ToList<dynamic>();
+            var data = await query.ToList<dynamic>();
 
-            var entities = Slapper.AutoMapper.MapDynamic<Entities.Url>(data)
-                                             .ToList();
+            var entities = AutoMapper.MapDynamic<Entities.Url>(data).ToList();
 
             if (!entities.Any())
             {

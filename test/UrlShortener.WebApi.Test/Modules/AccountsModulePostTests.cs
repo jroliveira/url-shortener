@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using FluentAssertions;
 using FluentValidation.Results;
 using Moq;
@@ -7,7 +8,6 @@ using Nancy;
 using Nancy.Testing;
 using NUnit.Framework;
 using UrlShortener.Entities;
-using UrlShortener.WebApi.Test.Lib;
 using UrlShortener.WebApi.Test.Lib.Extensions;
 
 namespace UrlShortener.WebApi.Test.Modules
@@ -19,7 +19,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             CreateMock
                 .Setup(c => c.Execute(It.IsAny<Account>()))
-                .Returns(1);
+                .Returns(Task.FromResult(1));
 
             AccountValidatorMock
                 .Setup(v => v.Validate(It.IsAny<Models.Account.Post.Account>()))

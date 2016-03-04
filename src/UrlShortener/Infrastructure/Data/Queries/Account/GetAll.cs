@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Simple.Data;
 using UrlShortener.Infrastructure.Data.Filter;
 
@@ -17,11 +18,12 @@ namespace UrlShortener.Infrastructure.Data.Queries.Account
 
         }
 
-        public GetAll(ISkip<Filter.Simple.Data.Filter> skip,
-                      ILimit<Filter.Simple.Data.Filter> limit,
-                      IWhere<Filter.Simple.Data.Filter, SimpleExpression> where,
-                      IOrder<Filter.Simple.Data.Filter, ObjectReference> order,
-                      IOrderDirection<Filter.Simple.Data.Filter, OrderByDirection> orderDirection)
+        public GetAll(
+            ISkip<Filter.Simple.Data.Filter> skip,
+            ILimit<Filter.Simple.Data.Filter> limit,
+            IWhere<Filter.Simple.Data.Filter, SimpleExpression> where,
+            IOrder<Filter.Simple.Data.Filter, ObjectReference> order,
+            IOrderDirection<Filter.Simple.Data.Filter, OrderByDirection> orderDirection)
         {
             _skip = skip;
             _limit = limit;
@@ -30,7 +32,7 @@ namespace UrlShortener.Infrastructure.Data.Queries.Account
             _orderDirection = orderDirection;
         }
 
-        public virtual Paged<Entities.Account> GetResult(Filter.Simple.Data.Filter filter)
+        public virtual async Task<Paged<Entities.Account>> GetResult(Filter.Simple.Data.Filter filter)
         {
             filter.Resource = "Accounts";
 
@@ -54,7 +56,7 @@ namespace UrlShortener.Infrastructure.Data.Queries.Account
                 query = query.OrderBy(_order.Apply(filter), _orderDirection.Apply(filter));
             }
 
-            var entities = query.ToList<Entities.Account>();
+            var entities = await query.ToList<Entities.Account>();
 
             if (entities == null || !entities.Any())
             {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using Nancy;
@@ -8,7 +9,6 @@ using NUnit.Framework;
 using UrlShortener.Entities;
 using UrlShortener.Infrastructure;
 using UrlShortener.Infrastructure.Data.Filter.Simple.Data;
-using UrlShortener.WebApi.Test.Lib;
 using UrlShortener.WebApi.Test.Lib.Extensions;
 using Url = UrlShortener.Entities.Url;
 
@@ -21,7 +21,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetAllMock
                 .Setup(q => q.GetResult(It.IsAny<Filter>(), null))
-                .Returns(new Paged<Url>
+                .Returns(Task.FromResult(new Paged<Url>
                 {
                     Data = new List<Url>
                     {
@@ -35,7 +35,7 @@ namespace UrlShortener.WebApi.Test.Modules
                             }
                         }
                     }
-                });
+                }));
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetAllMock
                 .Setup(q => q.GetResult(It.IsAny<Filter>(), null))
-                .Returns(default(Paged<Url>));
+                .Returns(Task.FromResult(default(Paged<Url>)));
 
             var response = Browser.Get("/urls", with =>
             {
@@ -129,7 +129,7 @@ namespace UrlShortener.WebApi.Test.Modules
         {
             GetAllMock
                 .Setup(q => q.GetResult(It.IsAny<Filter>(), null))
-                .Returns(default(Paged<Url>));
+                .Returns(Task.FromResult(default(Paged<Url>)));
 
             var response = Browser.Get("/urls", with =>
             {

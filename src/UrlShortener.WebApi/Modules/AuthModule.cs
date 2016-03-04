@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using Nancy;
 using Nancy.Authentication.Token;
 using Nancy.ModelBinding;
@@ -18,12 +20,13 @@ namespace UrlShortener.WebApi.Modules
             _tokenizer = tokenizer;
             _getByEmail = getByEmail;
 
-            Post["/"] = _ => Auth(this.Bind<Account>());
+            Post["/", true] = Auth;
         }
 
-        private Response Auth(Account model)
+        private async Task<dynamic> Auth(dynamic _, CancellationToken ct)
         {
-            var entity = _getByEmail.GetResult(model.Email);
+            var model = this.Bind<Account>();
+            var entity = await _getByEmail.GetResult(model.Email);
 
             if (entity == null)
             {
@@ -48,7 +51,7 @@ namespace UrlShortener.WebApi.Modules
                 accessToken = "Token" + token
             };
 
-            return Response.AsJson(response);
+            return Negotiate.WithModel(response);
         }
     }
 }
