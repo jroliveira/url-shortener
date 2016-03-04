@@ -8,7 +8,7 @@
 
         public virtual void Shorten()
         {
-            Shortened = string.Format("{0:X}", Address.GetHashCode()).ToLower();
+            Shortened = $"{Address.GetHashCode():X}".ToLower();
         }
     }
 }

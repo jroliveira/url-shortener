@@ -93,7 +93,7 @@ namespace UrlShortener.WebApi.Modules
             var response = new
             {
                 entity.Id,
-                Address = string.Format("{0}/{1}", Request.Url, entity.Shortened)
+                Address = $"{Request.Url}/{entity.Shortened}"
             };
 
             return

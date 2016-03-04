@@ -10,7 +10,7 @@ namespace UrlShortener.Infrastructure.Security
         {
             if (string.IsNullOrEmpty(text))
             {
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException(nameof(text));
             }
 
             var utf8Encoding = new UTF8Encoding();
