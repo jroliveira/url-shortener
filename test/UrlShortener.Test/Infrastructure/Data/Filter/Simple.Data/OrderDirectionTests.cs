@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using Restful.Query.Filter.Order;
 using Simple.Data;
 using UrlShortener.Infrastructure.Data.Filter.Simple.Data;
 
@@ -19,13 +18,16 @@ namespace UrlShortener.Test.Infrastructure.Data.Filter.Simple.Data
             _filterStub = new Mock<UrlShortener.Infrastructure.Data.Filter.Simple.Data.Filter>();
         }
 
-        [TestCase(Sorts.Desc, OrderByDirection.Descending)]
-        [TestCase(Sorts.Asc, OrderByDirection.Ascending)]
-        public void Apply_DadoFiltroComOrderSorts_DeveRetornar(Sorts sorts, OrderByDirection expected)
+        [TestCase(Restful.Query.Filter.Filters.Ordering.OrderByDirection.Descending, OrderByDirection.Descending)]
+        [TestCase(Restful.Query.Filter.Filters.Ordering.OrderByDirection.Ascending, OrderByDirection.Ascending)]
+        public void Apply_DadoFiltroComOrderSorts_DeveRetornar(Restful.Query.Filter.Filters.Ordering.OrderByDirection sorts, OrderByDirection expected)
         {
             _filterStub
-                .Setup(p => p.Order.Fields)
-                .Returns(new List<Field> { new Field("", sorts) });
+                .Setup(p => p.OrderBy)
+                .Returns(new Restful.Query.Filter.Filters.Ordering.OrderBy(new List<Restful.Query.Filter.Filters.Ordering.Field>
+                {
+                    new Restful.Query.Filter.Filters.Ordering.Field("", sorts)
+                }));
 
             var orderDirection = new OrderDirection();
 

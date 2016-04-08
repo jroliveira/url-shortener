@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Restful.Query.Filter.Where;
+using System.Linq;
+using Restful.Query.Filter.Filters.Condition.Operators;
 using Simple.Data;
 
 namespace UrlShortener.Infrastructure.Data.Filter.Simple.Data
@@ -9,28 +10,29 @@ namespace UrlShortener.Infrastructure.Data.Filter.Simple.Data
         public SimpleExpression Apply(Filter filter)
         {
             var leftOperand = GetLeftOperator(filter);
-            var rightOperand = filter.Where.Property.Value;
+            var rightOperand = filter.Where.Last().Value;
 
             var @operator = GetOperator(filter);
 
             return new SimpleExpression(leftOperand, rightOperand, @operator);
         }
 
-        private static SimpleExpressionType GetOperator(Filter filter)
+        private static SimpleExpressionType GetOperator(Restful.Query.Filter.Filter filter)
         {
-            var operations = new Dictionary<Operator, SimpleExpressionType>
+            var operations = new Dictionary<Comparison, SimpleExpressionType>
             {
-                { Operator.GreaterThan, SimpleExpressionType.GreaterThan },
-                { Operator.LessThan, SimpleExpressionType.LessThan }
+                { Comparison.GreaterThan, SimpleExpressionType.GreaterThan },
+                { Comparison.LessThan, SimpleExpressionType.LessThan },
+                { Comparison.Equal, SimpleExpressionType.Equal }
             };
 
-            return operations[filter.Where.Operator];
+            return operations[filter.Where.First().Comparison];
         }
 
         private static object GetLeftOperator(Filter filter)
         {
             var owner = ObjectReference.FromString(filter.Resource);
-            var name = filter.Where.Property.Name;
+            var name = filter.Where.First().Name;
 
             return new ObjectReference(name, owner);
         }

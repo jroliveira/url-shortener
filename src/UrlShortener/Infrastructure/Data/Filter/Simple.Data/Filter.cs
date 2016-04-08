@@ -5,10 +5,10 @@
         private readonly Restful.Query.Filter.Filter _filter;
 
         public virtual string Resource { get; set; }
-        public override Restful.Query.Filter.Limit Limit => _filter.Limit;
-        public override Restful.Query.Filter.Skip Skip => _filter.Skip;
-        public override Restful.Query.Filter.Order.Order Order => _filter.Order;
-        public override Restful.Query.Filter.Where.Where Where => _filter.Where;
+        public override Restful.Query.Filter.Filters.Limit Limit => _filter.Limit;
+        public override Restful.Query.Filter.Filters.Skip Skip => _filter.Skip;
+        public override Restful.Query.Filter.Filters.Ordering.OrderBy OrderBy => _filter.OrderBy;
+        public override Restful.Query.Filter.Filters.Condition.Where Where => _filter.Where;
 
         protected Filter()
         {

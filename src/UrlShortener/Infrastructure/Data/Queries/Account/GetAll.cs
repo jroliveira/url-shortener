@@ -46,12 +46,12 @@ namespace UrlShortener.Infrastructure.Data.Queries.Account
             query = query.Skip(skip)
                          .Take(limit);
 
-            if (filter.HasWhere)
+            if (filter.HasCondition)
             {
                 query = query.Where(_where.Apply(filter));
             }
 
-            if (filter.HasOrder)
+            if (filter.HasOrdering)
             {
                 query = query.OrderBy(_order.Apply(filter), _orderDirection.Apply(filter));
             }

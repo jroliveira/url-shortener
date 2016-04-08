@@ -56,7 +56,7 @@ namespace UrlShortener.Infrastructure.Data.Queries.Url
                 query.Where(new SimpleExpression(leftOperand, accountId, SimpleExpressionType.Equal));
             }
 
-            if (filter.HasOrder)
+            if (filter.HasOrdering)
             {
                 query = query.OrderBy(_order.Apply(filter), OrderByDirection.Ascending);
             }
